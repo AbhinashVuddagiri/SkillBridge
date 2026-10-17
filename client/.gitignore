@@ -1,0 +1,60 @@
+# Environment variables & secrets
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+.env.staging
+*.env
+*.env.*
+*.local
+*.pem
+*.key
+*.cert
+*.token
+credentials.json
+*credentials*.json
+
+!.env.example
+!**/.env.example
+
+# Dependencies
+node_modules/
+
+# Production build artifacts
+dist/
+dist-ssr/
+build/
+*.tsbuildinfo
+.vite/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Cache & Temp
+.cache/
+.eslintcache
+.oxlintcache
+*.tmp
+*.bak
+*.sw?
+*~
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
