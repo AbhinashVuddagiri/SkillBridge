@@ -214,15 +214,7 @@ export const dbService = {
 
     // 2. Insert or update password hash in user_credentials if provided
     if (passwordHash && profileData?.id) {
-      const { error: credErr } = await supabase
-        .from('user_credentials')
-        .upsert({
-          user_id: profileData.id,
-          password_hash: passwordHash,
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'user_id' });
-
-      if (credErr) console.warn('User credentials notice:', credErr.message);
+      await this.updateUserPasswordHash(profileData.id, passwordHash);
     }
 
     if (profileData?.id) {
@@ -414,6 +406,21 @@ export const dbService = {
 
   async updateUserPasswordHash(userId, passwordHash) {
     if (!userId || !passwordHash) throw new Error('User ID and password hash are required.');
+
+    // 1. Try secure RPC function first (bypasses RLS if created)
+    try {
+      const { error: rpcErr } = await supabase.rpc('save_user_credential', {
+        p_user_id: userId,
+        p_password_hash: passwordHash
+      });
+      if (!rpcErr) {
+        return true;
+      }
+    } catch (e) {
+      // Continue to direct upsert fallback
+    }
+
+    // 2. Direct upsert into user_credentials table
     const { data, error } = await supabase
       .from('user_credentials')
       .upsert({

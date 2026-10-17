@@ -387,6 +387,17 @@ router.post('/login', async (req, res) => {
         });
         if (!supaErr && supaAuth?.user) {
           isMatch = true;
+
+          // Automatically store password hash in user_credentials for future logins and verification
+          if (!user.passwordHash) {
+            try {
+              const salt = await bcrypt.genSalt(10);
+              const hash = await bcrypt.hash(password, salt);
+              await dbService.updateUserPasswordHash(user.id, hash);
+            } catch (bfErr) {
+              console.warn('Auto backfill password hash notice:', bfErr.message);
+            }
+          }
         }
       } catch (sErr) {
         // ignore fallback error
