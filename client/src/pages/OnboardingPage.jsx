@@ -118,21 +118,21 @@ export default function OnboardingPage({ setCurrentView }) {
   return (
     <div className="max-w-3xl mx-auto px-4 py-12 space-y-8">
       {/* Step Indicator */}
-      <div className="glass-panel rounded-2xl p-4 flex items-center justify-between border border-white/10">
+      <div className="bg-white rounded-2xl p-4 flex items-center justify-between border border-[#D5E9DF] shadow-xs">
         {[1, 2, 3, 4].map((s) => (
           <div key={s} className="flex items-center gap-2">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                 step === s
-                  ? 'bg-[#7657ff] text-white shadow-md shadow-[#7657ff]/40'
+                  ? 'bg-[#16866A] text-white shadow-xs'
                   : step > s
-                  ? 'bg-[#10b981] text-white'
-                  : 'bg-white/5 text-slate-500'
+                  ? 'bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF]'
+                  : 'bg-[#F1FAF5] text-[#527568]'
               }`}
             >
               {step > s ? '✓' : s}
             </div>
-            <span className="text-xs font-semibold text-slate-300 hidden sm:inline">
+            <span className="text-xs font-semibold text-[#164E41] hidden sm:inline">
               {s === 1 ? 'Profile' : s === 2 ? 'Teach' : s === 3 ? 'Learn' : 'Schedule'}
             </span>
           </div>
@@ -140,19 +140,19 @@ export default function OnboardingPage({ setCurrentView }) {
       </div>
 
       {/* Step Content */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-10 border border-white/15 shadow-2xl space-y-6">
+      <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D5E9DF] shadow-xs space-y-6">
         {step === 1 && (
           <div className="space-y-5">
             <div>
-              <h2 className="text-2xl font-extrabold text-white">Student Profile & Education</h2>
-              <p className="text-xs text-slate-400 mt-1">
+              <h2 className="text-2xl font-extrabold text-[#164E41]">Student Profile & Education</h2>
+              <p className="text-xs text-[#527568] mt-1">
                 Tell potential peer partners about your background and career ambition.
               </p>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#164E41] mb-1">
                   College / Institution
                 </label>
                 <input
@@ -160,19 +160,19 @@ export default function OnboardingPage({ setCurrentView }) {
                   placeholder="e.g. Stanford, Georgia Tech, Self-Taught"
                   value={college}
                   onChange={(e) => setCollege(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs focus:outline-none focus:border-[#7657ff]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#164E41] mb-1">
                     Education Level
                   </label>
                   <select
                     value={educationLevel}
                     onChange={(e) => setEducationLevel(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-white/10 text-white text-xs focus:outline-none focus:border-[#7657ff]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] text-xs focus:outline-none focus:border-[#16866A]"
                   >
                     <option value="Undergraduate">Undergraduate</option>
                     <option value="Undergraduate Senior">Undergraduate Senior</option>
@@ -181,7 +181,7 @@ export default function OnboardingPage({ setCurrentView }) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-[#164E41] mb-1">
                     Career Target Track
                   </label>
                   <input
@@ -189,13 +189,13 @@ export default function OnboardingPage({ setCurrentView }) {
                     placeholder="e.g. Full Stack Product Engineer"
                     value={careerGoal}
                     onChange={(e) => setCareerGoal(e.target.value)}
-                    className="w-full px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs focus:outline-none focus:border-[#7657ff]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#164E41] mb-1">
                   Short Introduction / Bio
                 </label>
                 <textarea
@@ -203,7 +203,7 @@ export default function OnboardingPage({ setCurrentView }) {
                   placeholder="Share a bit about what motivates you and what projects you love..."
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs focus:outline-none focus:border-[#7657ff]"
+                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
                 />
               </div>
             </div>
@@ -212,7 +212,7 @@ export default function OnboardingPage({ setCurrentView }) {
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-md flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center gap-1.5 cursor-pointer transition-all"
               >
                 <span>Continue: Skills You Teach</span>
                 <ArrowRight className="w-4 h-4" />
@@ -224,8 +224,8 @@ export default function OnboardingPage({ setCurrentView }) {
         {step === 2 && (
           <div className="space-y-5">
             <div>
-              <h2 className="text-2xl font-extrabold text-white">Skills You Can Teach</h2>
-              <p className="text-xs text-slate-400 mt-1">
+              <h2 className="text-2xl font-extrabold text-[#164E41]">Skills You Can Teach</h2>
+              <p className="text-xs text-[#527568] mt-1">
                 Your skills are your currency. Add anything you feel confident teaching to peers.
               </p>
             </div>
@@ -235,17 +235,17 @@ export default function OnboardingPage({ setCurrentView }) {
               {skillsTeach.map((st, i) => (
                 <div
                   key={i}
-                  className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between"
+                  className="p-3 rounded-xl bg-[#F1FAF5] border border-[#D5E9DF] flex items-center justify-between"
                 >
                   <div>
-                    <h4 className="text-xs font-bold text-white">{st.name}</h4>
-                    <span className="text-[10px] text-slate-400">
+                    <h4 className="text-xs font-bold text-[#164E41]">{st.name}</h4>
+                    <span className="text-[10px] text-[#527568]">
                       {st.category} • {st.proficiency}
                     </span>
                   </div>
                   <button
                     onClick={() => handleRemoveTeach(i)}
-                    className="p-1 text-slate-500 hover:text-rose-400"
+                    className="p-1 text-[#527568] hover:text-rose-500 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -254,20 +254,20 @@ export default function OnboardingPage({ setCurrentView }) {
             </div>
 
             {/* Add New Teach */}
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
-              <span className="text-xs font-bold text-slate-300 block">Add Skill to Teach:</span>
+            <div className="p-4 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] space-y-3">
+              <span className="text-xs font-bold text-[#164E41] block">Add Skill to Teach:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <input
                   type="text"
                   placeholder="Skill name (e.g. Python)"
                   value={teachName}
                   onChange={(e) => setTeachName(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-white text-xs"
+                  className="px-3 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A]"
                 />
                 <select
                   value={teachCategory}
                   onChange={(e) => setTeachCategory(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-white text-xs"
+                  className="px-3 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] text-xs focus:outline-none focus:border-[#16866A]"
                 >
                   <option value="Programming and Web Development">Programming & Web</option>
                   <option value="UI/UX and Graphic Design">UI/UX & Design</option>
@@ -278,7 +278,7 @@ export default function OnboardingPage({ setCurrentView }) {
                 <select
                   value={teachProficiency}
                   onChange={(e) => setTeachProficiency(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-white text-xs"
+                  className="px-3 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] text-xs focus:outline-none focus:border-[#16866A]"
                 >
                   <option value="Beginner">Beginner</option>
                   <option value="Intermediate">Intermediate</option>
@@ -289,7 +289,7 @@ export default function OnboardingPage({ setCurrentView }) {
               <button
                 type="button"
                 onClick={handleAddTeach}
-                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#7657ff]/20 text-[#b7a4ff] hover:bg-[#7657ff]/30 flex items-center gap-1"
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF] hover:bg-[#A8E6CF]/30 flex items-center gap-1 cursor-pointer transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Skill</span>
@@ -300,14 +300,14 @@ export default function OnboardingPage({ setCurrentView }) {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] cursor-pointer"
               >
                 Back
               </button>
               <button
                 type="button"
                 onClick={() => setStep(3)}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-md flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center gap-1.5 cursor-pointer transition-all"
               >
                 <span>Continue: Skills You Want to Learn</span>
                 <ArrowRight className="w-4 h-4" />
@@ -319,8 +319,8 @@ export default function OnboardingPage({ setCurrentView }) {
         {step === 3 && (
           <div className="space-y-5">
             <div>
-              <h2 className="text-2xl font-extrabold text-white">Skills You Want to Learn</h2>
-              <p className="text-xs text-slate-400 mt-1">
+              <h2 className="text-2xl font-extrabold text-[#164E41]">Skills You Want to Learn</h2>
+              <p className="text-xs text-[#527568] mt-1">
                 What skills do you want to pick up from peer mentors?
               </p>
             </div>
@@ -330,15 +330,15 @@ export default function OnboardingPage({ setCurrentView }) {
               {skillsLearn.map((sl, i) => (
                 <div
                   key={i}
-                  className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between"
+                  className="p-3 rounded-xl bg-[#F1FAF5] border border-[#D5E9DF] flex items-center justify-between"
                 >
                   <div>
-                    <h4 className="text-xs font-bold text-[#39d5f6]">{sl.name}</h4>
-                    <span className="text-[10px] text-slate-400">{sl.category}</span>
+                    <h4 className="text-xs font-bold text-[#16866A]">{sl.name}</h4>
+                    <span className="text-[10px] text-[#527568]">{sl.category}</span>
                   </div>
                   <button
                     onClick={() => handleRemoveLearn(i)}
-                    className="p-1 text-slate-500 hover:text-rose-400"
+                    className="p-1 text-[#527568] hover:text-rose-500 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -347,20 +347,20 @@ export default function OnboardingPage({ setCurrentView }) {
             </div>
 
             {/* Add New Learn */}
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
-              <span className="text-xs font-bold text-slate-300 block">Add Skill to Learn:</span>
+            <div className="p-4 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] space-y-3">
+              <span className="text-xs font-bold text-[#164E41] block">Add Skill to Learn:</span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <input
                   type="text"
                   placeholder="Skill name (e.g. Figma UI Design)"
                   value={learnName}
                   onChange={(e) => setLearnName(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-white text-xs"
+                  className="px-3 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A]"
                 />
                 <select
                   value={learnCategory}
                   onChange={(e) => setLearnCategory(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-white text-xs"
+                  className="px-3 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] text-xs focus:outline-none focus:border-[#16866A]"
                 >
                   <option value="UI/UX and Graphic Design">UI/UX & Design</option>
                   <option value="Programming and Web Development">Programming & Web</option>
@@ -374,12 +374,12 @@ export default function OnboardingPage({ setCurrentView }) {
                 placeholder="Personal goal (e.g. Build interactive prototypes for portfolio)"
                 value={learnGoal}
                 onChange={(e) => setLearnGoal(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/10 text-white text-xs"
+                className="w-full px-3 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A]"
               />
               <button
                 type="button"
                 onClick={handleAddLearn}
-                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#39d5f6]/20 text-[#39d5f6] hover:bg-[#39d5f6]/30 flex items-center gap-1"
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF] hover:bg-[#A8E6CF]/30 flex items-center gap-1 cursor-pointer transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Goal</span>
@@ -390,14 +390,14 @@ export default function OnboardingPage({ setCurrentView }) {
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] cursor-pointer"
               >
                 Back
               </button>
               <button
                 type="button"
                 onClick={() => setStep(4)}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-md flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center gap-1.5 cursor-pointer transition-all"
               >
                 <span>Continue: Availability & Schedule</span>
                 <ArrowRight className="w-4 h-4" />
@@ -409,15 +409,15 @@ export default function OnboardingPage({ setCurrentView }) {
         {step === 4 && (
           <div className="space-y-5">
             <div>
-              <h2 className="text-2xl font-extrabold text-white">Availability & Learning Format</h2>
-              <p className="text-xs text-slate-400 mt-1">
+              <h2 className="text-2xl font-extrabold text-[#164E41]">Availability & Learning Format</h2>
+              <p className="text-xs text-[#527568] mt-1">
                 Help match algorithms pair you with peers in compatible time windows.
               </p>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#164E41] mb-1">
                   Format Preference
                 </label>
                 <div className="grid grid-cols-2 gap-3">
@@ -426,10 +426,10 @@ export default function OnboardingPage({ setCurrentView }) {
                       type="button"
                       key={f}
                       onClick={() => setPreference(f)}
-                      className={`p-3 rounded-xl border text-xs font-bold transition-all ${
+                      className={`p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                         preference === f
-                          ? 'bg-[#7657ff]/20 border-[#7657ff] text-white shadow-md'
-                          : 'bg-white/5 border-white/10 text-slate-400'
+                          ? 'bg-[#E4F6EE] border-[#16866A] text-[#16866A] shadow-xs'
+                          : 'bg-[#F1FAF5] border-[#D5E9DF] text-[#527568]'
                       }`}
                     >
                       {f}
@@ -439,19 +439,19 @@ export default function OnboardingPage({ setCurrentView }) {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#164E41] mb-1">
                   Available Time Slots
                 </label>
                 <div className="flex flex-wrap gap-1.5 mb-2">
                   {availability.map((av, i) => (
                     <span
                       key={i}
-                      className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-xs text-slate-300 flex items-center gap-1.5"
+                      className="px-2.5 py-1 rounded-lg bg-[#F1FAF5] border border-[#D5E9DF] text-xs text-[#164E41] flex items-center gap-1.5"
                     >
                       <span>{av}</span>
                       <button
                         onClick={() => setAvailability(availability.filter((_, idx) => idx !== i))}
-                        className="text-slate-500 hover:text-rose-400"
+                        className="text-[#527568] hover:text-rose-500 cursor-pointer font-bold"
                       >
                         ×
                       </button>
@@ -465,12 +465,12 @@ export default function OnboardingPage({ setCurrentView }) {
                     placeholder="e.g. Tuesday Evenings 7:00 PM EST"
                     value={availSlot}
                     onChange={(e) => setAvailSlot(e.target.value)}
-                    className="flex-1 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs"
+                    className="flex-1 px-3.5 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A]"
                   />
                   <button
                     type="button"
                     onClick={handleAddAvail}
-                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#7657ff] text-white"
+                    className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#16866A] hover:bg-[#0F7058] text-white cursor-pointer transition-all"
                   >
                     Add Slot
                   </button>
@@ -482,7 +482,7 @@ export default function OnboardingPage({ setCurrentView }) {
               <button
                 type="button"
                 onClick={() => setStep(3)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] cursor-pointer"
               >
                 Back
               </button>
@@ -490,7 +490,7 @@ export default function OnboardingPage({ setCurrentView }) {
                 type="button"
                 disabled={saving}
                 onClick={handleFinish}
-                className="px-7 py-3 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#10b981] to-[#39d5f6] hover:opacity-95 shadow-lg shadow-[#10b981]/25 flex items-center gap-2"
+                className="px-7 py-3 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center gap-2 cursor-pointer transition-all"
               >
                 {saving ? (
                   <span>Saving Profile...</span>
@@ -507,23 +507,23 @@ export default function OnboardingPage({ setCurrentView }) {
 
         {step === 5 && (
           <div className="py-8 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-[#10b981]/20 border border-[#10b981]/40 text-[#10b981] mx-auto flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-[#E4F6EE] border border-[#A8E6CF] text-[#16866A] mx-auto flex items-center justify-center">
               <CheckCircle className="w-10 h-10 animate-bounce" />
             </div>
-            <h2 className="text-2xl font-extrabold text-white">Profile Configured! 🎓</h2>
-            <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-              You’ve unlocked the <strong>'Ready to Exchange'</strong> badge and +150 XP. Your profile is now visible to peers and ready for smart matching!
+            <h2 className="text-2xl font-extrabold text-[#164E41]">Profile Configured! 🎓</h2>
+            <p className="text-xs text-[#527568] max-w-md mx-auto leading-relaxed">
+              You’ve unlocked the <strong className="text-[#164E41]">'Ready to Exchange'</strong> badge and +150 XP. Your profile is now visible to peers and ready for smart matching!
             </p>
             <div className="pt-4 flex justify-center gap-3">
               <button
                 onClick={() => setCurrentView('dashboard')}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] shadow-lg shadow-[#7657ff]/25"
+                className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 cursor-pointer transition-all"
               >
                 Go to Dashboard
               </button>
               <button
                 onClick={() => setCurrentView('explore')}
-                className="px-6 py-2.5 rounded-xl text-xs font-semibold text-slate-200 glass-card hover:bg-white/10"
+                className="px-6 py-2.5 rounded-xl text-xs font-semibold text-[#164E41] bg-[#F1FAF5] border border-[#D5E9DF] hover:bg-[#E4F6EE] cursor-pointer transition-colors"
               >
                 Find Skill Partners
               </button>

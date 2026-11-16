@@ -495,11 +495,12 @@ router.post('/forgot-password/send-otp', async (req, res) => {
   }
 });
 
-// POST /api/auth/forgot-password/reset
-// Verifies OTP with Supabase Auth, updates password, sets new password for next login
-router.post('/forgot-password/reset', async (req, res) => {
+// POST /api/auth/forgot-password/verify-otp
+// Step 2 of password reset: ONLY verifies the OTP and returns a signed resetToken.
+// Does NOT modify or update the password.
+router.post('/forgot-password/verify-otp', async (req, res) => {
   try {
-    const { identifier, otp, newPassword, confirmPassword } = req.body || {};
+    const { identifier, otp } = req.body || {};
     let trimmed = (identifier || '').trim();
     if (trimmed.startsWith('@') && !trimmed.slice(1).includes('@')) {
       trimmed = trimmed.slice(1).trim();
@@ -507,25 +508,16 @@ router.post('/forgot-password/reset', async (req, res) => {
     const trimmedOtp = (otp || '').trim();
 
     if (!trimmed) {
-      return res.status(400).json({ error: 'Please enter your Username or Gmail address.' });
+      return res.status(400).json({ verified: false, error: 'Please enter your Username or Gmail address.' });
     }
     if (!trimmedOtp || trimmedOtp.length < 6) {
-      return res.status(400).json({ error: 'Please enter the 6-digit OTP code sent to your Gmail.' });
-    }
-
-    // Validate new password rules
-    const passCheck = validatePasswordStrength(newPassword);
-    if (!passCheck.valid) {
-      return res.status(400).json({ error: passCheck.message });
-    }
-    if (newPassword !== confirmPassword) {
-      return res.status(400).json({ error: 'Passwords do not match. Please verify both fields.' });
+      return res.status(400).json({ verified: false, error: 'Please enter the 6-digit OTP code sent to your Gmail.' });
     }
 
     // Find user
     const user = await dbService.getUserCredentialsForLogin(trimmed);
     if (!user || !user.email) {
-      return res.status(400).json({ error: 'Account or verified Gmail address not found.' });
+      return res.status(400).json({ verified: false, error: 'Account or verified Gmail address not found.' });
     }
 
     // Verify OTP using Supabase Auth
@@ -546,19 +538,119 @@ router.post('/forgot-password/reset', async (req, res) => {
 
     if (verifyRes.error) {
       return res.status(400).json({
-        error: 'Invalid or expired OTP code. Password reset cancelled.'
+        verified: false,
+        error: 'Invalid or expired OTP code. Please check the code and try again.'
       });
+    }
+
+    // Sign a cryptographically secure reset token valid for 15 minutes
+    const resetToken = jwt.sign(
+      {
+        userId: user.id,
+        email: user.email,
+        session: verifyRes.data?.session,
+        purpose: 'password-reset-verified'
+      },
+      JWT_SECRET,
+      { expiresIn: '15m' }
+    );
+
+    return res.json({
+      verified: true,
+      success: true,
+      message: 'Email verified successfully!',
+      resetToken
+    });
+  } catch (err) {
+    console.error('Forgot password verify OTP error:', err);
+    return res.status(500).json({ verified: false, error: 'Failed to verify OTP: ' + err.message });
+  }
+});
+
+// POST /api/auth/forgot-password/reset
+// Updates password after successful OTP verification. Accepts signed resetToken OR raw OTP.
+router.post('/forgot-password/reset', async (req, res) => {
+  try {
+    const { resetToken, identifier, otp, newPassword, confirmPassword } = req.body || {};
+    let trimmed = (identifier || '').trim();
+    if (trimmed.startsWith('@') && !trimmed.slice(1).includes('@')) {
+      trimmed = trimmed.slice(1).trim();
+    }
+    const trimmedOtp = (otp || '').trim();
+
+    // Validate new password rules
+    const passCheck = validatePasswordStrength(newPassword);
+    if (!passCheck.valid) {
+      return res.status(400).json({ error: passCheck.message });
+    }
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ error: 'Passwords do not match. Please verify both fields.' });
+    }
+
+    let user = null;
+    let verifiedSession = null;
+
+    if (resetToken) {
+      try {
+        const decoded = jwt.verify(resetToken, JWT_SECRET);
+        if (decoded.purpose !== 'password-reset-verified') {
+          return res.status(400).json({ error: 'Invalid or expired password reset session. Please verify OTP again.' });
+        }
+        user = await dbService.getUserCredentialsForLogin(decoded.email || decoded.userId);
+        verifiedSession = decoded.session;
+      } catch (tokErr) {
+        return res.status(400).json({ error: 'Password reset session has expired. Please verify OTP again.' });
+      }
+    } else {
+      // Fallback: Verify OTP directly
+      if (!trimmed) {
+        return res.status(400).json({ error: 'Please enter your Username or Gmail address.' });
+      }
+      if (!trimmedOtp || trimmedOtp.length < 6) {
+        return res.status(400).json({ error: 'Please enter the 6-digit OTP code sent to your Gmail.' });
+      }
+
+      user = await dbService.getUserCredentialsForLogin(trimmed);
+      if (!user || !user.email) {
+        return res.status(400).json({ error: 'Account or verified Gmail address not found.' });
+      }
+
+      let verifyRes = await supabase.auth.verifyOtp({
+        email: user.email,
+        token: trimmedOtp,
+        type: 'email'
+      });
+
+      if (verifyRes.error) {
+        verifyRes = await supabase.auth.verifyOtp({
+          email: user.email,
+          token: trimmedOtp,
+          type: 'recovery'
+        });
+      }
+
+      if (verifyRes.error) {
+        return res.status(400).json({
+          error: 'Invalid or expired OTP code. Password reset cancelled.'
+        });
+      }
+
+      verifiedSession = verifyRes.data?.session;
+    }
+
+    if (!user || !user.id) {
+      return res.status(400).json({ error: 'Target account not found.' });
     }
 
     // Update password in Supabase Auth user session if available
     try {
-      if (verifyRes.data?.session?.access_token) {
+      if (verifiedSession?.access_token) {
         const supaUserClient = createClient(supabaseUrl, supabaseKey, {
           auth: { persistSession: false }
         });
         await supaUserClient.auth.setSession({
-          access_token: verifyRes.data.session.access_token,
-          refresh_token: verifyRes.data.session.refresh_token || ''
+          access_token: verifiedSession.access_token,
+          refresh_token: verifiedSession.refresh_token || ''
         });
         await supaUserClient.auth.updateUser({ password: newPassword });
       }

@@ -102,8 +102,12 @@ export function AuthProvider({ children }) {
     return await api.forgotPasswordSendOtp(identifier);
   };
 
-  const forgotPasswordReset = async ({ identifier, otp, newPassword, confirmPassword }) => {
-    return await api.forgotPasswordReset({ identifier, otp, newPassword, confirmPassword });
+  const forgotPasswordVerifyOtp = async (identifier, otp) => {
+    return await api.forgotPasswordVerifyOtp(identifier, otp);
+  };
+
+  const forgotPasswordReset = async (payload) => {
+    return await api.forgotPasswordReset(payload);
   };
 
   const sendDeleteAccountOtp = async (gmail) => {
@@ -205,6 +209,7 @@ export function AuthProvider({ children }) {
         sendRegistrationOtp,
         verifyRegistrationOtp,
         forgotPasswordSendOtp,
+        forgotPasswordVerifyOtp,
         forgotPasswordReset,
         sendDeleteAccountOtp,
         refreshUser,

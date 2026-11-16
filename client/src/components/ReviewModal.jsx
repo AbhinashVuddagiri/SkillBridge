@@ -56,40 +56,40 @@ export default function ReviewModal({ exchange, onClose, onReviewSubmitted }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-md animate-in fade-in duration-150">
-      <div className="relative w-full max-w-md glass-panel rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/20">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#164E41]/40 backdrop-blur-sm animate-in fade-in duration-150">
+      <div className="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#D5E9DF]">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10"
+          className="absolute top-5 right-5 p-2 rounded-full text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {success ? (
           <div className="py-12 text-center space-y-3">
-            <div className="w-16 h-16 mx-auto rounded-full bg-[#10b981]/20 border border-[#10b981]/40 flex items-center justify-center text-[#10b981]">
-              <CheckCircle className="w-10 h-10 animate-bounce" />
+            <div className="w-16 h-16 mx-auto rounded-full bg-[#E4F6EE] border border-[#A8E6CF] flex items-center justify-center text-[#16866A]">
+              <CheckCircle className="w-10 h-10 animate-bounce text-[#16866A]" />
             </div>
-            <h3 className="text-xl font-bold text-white">Review Published! ⭐</h3>
-            <p className="text-xs text-slate-300">
+            <h3 className="text-xl font-bold text-[#164E41]">Review Published! ⭐</h3>
+            <p className="text-xs text-[#527568]">
               Thank you for supporting community trust and recognizing your peer partner.
             </p>
           </div>
         ) : (
           <>
             <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#7657ff]/20 text-[#b7a4ff] mb-2 border border-[#7657ff]/40">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#E4F6EE] text-[#16866A] mb-2 border border-[#D5E9DF]">
                 <Sparkles className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-bold text-white">Rate Skill Exchange</h3>
-              <p className="text-xs text-slate-400 mt-1">
+              <h3 className="text-xl font-bold text-[#164E41]">Rate Skill Exchange</h3>
+              <p className="text-xs text-[#527568] mt-1">
                 How was your peer learning experience with {partner?.name}?
               </p>
             </div>
 
             {error && (
-              <div className="mb-4 p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+              <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
                 <span>{error}</span>
               </div>
             )}
@@ -97,7 +97,7 @@ export default function ReviewModal({ exchange, onClose, onReviewSubmitted }) {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Star Rating */}
               <div className="flex flex-col items-center gap-1.5 py-2">
-                <span className="text-xs font-semibold text-slate-300">
+                <span className="text-xs font-semibold text-[#164E41]">
                   Rating for {partnerSkill}:
                 </span>
                 <div className="flex items-center gap-2">
@@ -108,13 +108,13 @@ export default function ReviewModal({ exchange, onClose, onReviewSubmitted }) {
                       onClick={() => setRating(star)}
                       onMouseEnter={() => setHoverRating(star)}
                       onMouseLeave={() => setHoverRating(0)}
-                      className="p-1 transition-transform hover:scale-125"
+                      className="p-1 transition-transform hover:scale-125 cursor-pointer"
                     >
                       <Star
                         className={`w-7 h-7 ${
                           (hoverRating || rating) >= star
                             ? 'text-amber-400 fill-amber-400'
-                            : 'text-slate-600'
+                            : 'text-[#C8DFD3]'
                         }`}
                       />
                     </button>
@@ -124,7 +124,7 @@ export default function ReviewModal({ exchange, onClose, onReviewSubmitted }) {
 
               {/* Written review */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#164E41] mb-1">
                   Written Feedback & Testimonial
                 </label>
                 <textarea
@@ -133,14 +133,14 @@ export default function ReviewModal({ exchange, onClose, onReviewSubmitted }) {
                   placeholder={`Describe how ${partner?.name} helped you learn ${partnerSkill}, their teaching style, and any helpful projects you tackled.`}
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-white/5 border border-white/15 text-white text-xs focus:outline-none focus:border-[#7657ff]"
+                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-lg shadow-[#7657ff]/25 flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl font-bold text-xs text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center justify-center gap-2 cursor-pointer transition-all"
               >
                 {loading ? (
                   <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />

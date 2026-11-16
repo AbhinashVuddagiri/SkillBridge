@@ -9,9 +9,9 @@ import NotificationDrawer from './components/NotificationDrawer';
 
 // Pages
 import LandingPage from './pages/LandingPage';
-import ExploreSkillsPage from './pages/ExploreSkillsPage';
-import ProfilePage from './pages/ProfilePage';
-import ChatPage from './pages/ChatPage';
+const ExploreSkillsPage = React.lazy(() => import('./pages/ExploreSkillsPage'));
+const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
+const ChatPage = React.lazy(() => import('./pages/ChatPage'));
 
 export default function App() {
   const { user, isAuthenticated, activeChatConnectionId, setActiveChatConnectionId } = useAuth();
@@ -131,32 +131,45 @@ export default function App() {
   }, []);
 
   const renderView = () => {
-    switch (currentView) {
-      case 'home':
-        return <LandingPage setCurrentView={setCurrentView} />;
-      case 'explore':
-        return (
-          <ExploreSkillsPage
-            onOpenChat={handleOpenChat}
-          />
-        );
-      case 'profile':
-        return <ProfilePage setCurrentView={setCurrentView} />;
-      case 'chat':
-        return (
-          <ChatPage
-            selectedConnectionId={activeChatConnectionId}
-            setSelectedConnectionId={setActiveChatConnectionId}
-            setCurrentView={setCurrentView}
-          />
-        );
-      default:
-        return <LandingPage setCurrentView={setCurrentView} />;
-    }
+    return (
+      <React.Suspense
+        fallback={
+          <div className="py-24 text-center">
+            <div className="w-10 h-10 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <p className="text-xs text-[#527568]">Loading...</p>
+          </div>
+        }
+      >
+        {(() => {
+          switch (currentView) {
+            case 'home':
+              return <LandingPage setCurrentView={setCurrentView} />;
+            case 'explore':
+              return (
+                <ExploreSkillsPage
+                  onOpenChat={handleOpenChat}
+                />
+              );
+            case 'profile':
+              return <ProfilePage setCurrentView={setCurrentView} />;
+            case 'chat':
+              return (
+                <ChatPage
+                  selectedConnectionId={activeChatConnectionId}
+                  setSelectedConnectionId={setActiveChatConnectionId}
+                  setCurrentView={setCurrentView}
+                />
+              );
+            default:
+              return <LandingPage setCurrentView={setCurrentView} />;
+          }
+        })()}
+      </React.Suspense>
+    );
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative selection:bg-[#7657ff]/30 selection:text-white">
+    <div className="min-h-screen flex flex-col relative bg-[#F1FAF5] text-[#164E41] selection:bg-[#A8E6CF] selection:text-[#164E41]">
       {/* Liquid Glass Background Orbs */}
       <LiquidBackground />
 

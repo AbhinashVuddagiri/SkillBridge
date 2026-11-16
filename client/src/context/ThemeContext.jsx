@@ -3,27 +3,21 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('skillbridge_theme') || 'dark';
-  });
+  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    localStorage.setItem('skillbridge_theme', theme);
-    if (theme === 'dark') {
-      document.body.classList.add('dark');
-      document.body.classList.remove('light');
-    } else {
-      document.body.classList.add('light');
-      document.body.classList.remove('dark');
-    }
-  }, [theme]);
+    localStorage.setItem('skillbridge_theme', 'light');
+    document.body.classList.remove('dark');
+    document.body.classList.add('light');
+  }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+    // Light mint & white theme locked per specification
+    setTheme('light');
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, isDark: theme === 'dark', toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: 'light', isDark: false, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

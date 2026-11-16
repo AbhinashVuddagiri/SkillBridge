@@ -64,7 +64,7 @@ export default function CompatibilityMapPage({ setCurrentView }) {
       // Draw subtle circular orbit guides
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(118, 87, 255, 0.1)';
+      ctx.strokeStyle = 'rgba(22, 134, 106, 0.15)';
       ctx.lineWidth = 1;
       ctx.stroke();
 
@@ -82,11 +82,11 @@ export default function CompatibilityMapPage({ setCurrentView }) {
           ctx.lineTo(target.x, target.y);
 
           if (isSelected) {
-            ctx.strokeStyle = 'rgba(57, 213, 246, 0.7)';
+            ctx.strokeStyle = '#16866A';
             ctx.lineWidth = 2.5;
             ctx.setLineDash([4, 4]);
           } else {
-            ctx.strokeStyle = 'rgba(118, 87, 255, 0.25)';
+            ctx.strokeStyle = 'rgba(22, 134, 106, 0.25)';
             ctx.lineWidth = 1.2;
             ctx.setLineDash([]);
           }
@@ -100,7 +100,7 @@ export default function CompatibilityMapPage({ setCurrentView }) {
 
           ctx.beginPath();
           ctx.arc(px, py, 3, 0, Math.PI * 2);
-          ctx.fillStyle = isSelected ? '#39d5f6' : '#b7a4ff';
+          ctx.fillStyle = isSelected ? '#16866A' : '#A8E6CF';
           ctx.fill();
         }
       });
@@ -117,27 +117,27 @@ export default function CompatibilityMapPage({ setCurrentView }) {
         if (isSelected) {
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.radius + 8, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(57, 213, 246, 0.25)';
+          ctx.fillStyle = 'rgba(168, 230, 207, 0.5)';
           ctx.fill();
         }
 
         // Node Circle
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = isSelected ? '#7657ff' : '#12182d';
-        ctx.strokeStyle = isSelected ? '#39d5f6' : 'rgba(255, 255, 255, 0.2)';
-        ctx.lineWidth = isSelected ? 3 : 1.5;
+        ctx.fillStyle = isSelected ? '#16866A' : '#FFFFFF';
+        ctx.strokeStyle = isSelected ? '#A8E6CF' : '#D5E9DF';
+        ctx.lineWidth = isSelected ? 3 : 2;
         ctx.fill();
         ctx.stroke();
 
         // Node Label
         ctx.font = 'bold 11px Plus Jakarta Sans, sans-serif';
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = '#164E41';
         ctx.textAlign = 'center';
         ctx.fillText(node.name.split(' ')[0], node.x, node.y + node.radius + 16);
 
         ctx.font = '9px Plus Jakarta Sans, sans-serif';
-        ctx.fillStyle = '#b7a4ff';
+        ctx.fillStyle = '#16866A';
         ctx.fillText(node.topTeach, node.x, node.y + node.radius + 28);
       });
 
@@ -172,14 +172,14 @@ export default function CompatibilityMapPage({ setCurrentView }) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Title */}
       <div className="space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7657ff]/20 text-[#b7a4ff] text-xs font-bold">
-          <Network className="w-4 h-4 text-[#39d5f6]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF] text-xs font-bold">
+          <Network className="w-4 h-4 text-[#16866A]" />
           <span>Interactive Compatibility Network</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#164E41] tracking-tight">
           Skill Exchange Compatibility Map
         </h1>
-        <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#527568] max-w-2xl leading-relaxed">
           Explore bidirectional learning relationships across the student ecosystem. Nodes represent active learners; lines represent mutual exchange potential. Click any node to inspect their details.
         </p>
       </div>
@@ -187,10 +187,10 @@ export default function CompatibilityMapPage({ setCurrentView }) {
       {/* Main Layout: Canvas + Detail Sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Interactive Canvas Area */}
-        <div className="lg:col-span-8 glass-panel rounded-3xl p-4 sm:p-6 border border-white/15 shadow-2xl relative overflow-hidden">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs text-slate-400">
-            <span className="flex items-center gap-1.5 font-semibold text-white">
-              <Sparkles className="w-4 h-4 text-[#39d5f6]" /> Live Network Graph
+        <div className="lg:col-span-8 bg-white rounded-3xl p-4 sm:p-6 border border-[#D5E9DF] shadow-xs relative overflow-hidden">
+          <div className="flex items-center justify-between pb-3 border-b border-[#D5E9DF] text-xs text-[#527568]">
+            <span className="flex items-center gap-1.5 font-semibold text-[#164E41]">
+              <Sparkles className="w-4 h-4 text-[#16866A]" /> Live Network Graph
             </span>
             <span>Click any student node to highlight mutual connections</span>
           </div>
@@ -201,7 +201,7 @@ export default function CompatibilityMapPage({ setCurrentView }) {
         </div>
 
         {/* Selected Node Sidebar */}
-        <div className="lg:col-span-4 glass-card rounded-3xl p-6 sm:p-7 border border-white/15 space-y-6">
+        <div className="lg:col-span-4 bg-white rounded-3xl p-6 sm:p-7 border border-[#D5E9DF] shadow-xs space-y-6">
           {selectedNode ? (
             <div className="space-y-5">
               <div className="flex items-center gap-3">
@@ -211,36 +211,36 @@ export default function CompatibilityMapPage({ setCurrentView }) {
                     `https://api.dicebear.com/7.x/bottts/svg?seed=${selectedNode.name}`
                   }
                   alt={selectedNode.name}
-                  className="w-14 h-14 rounded-2xl object-cover border-2 border-[#7657ff]/40 shadow-lg"
+                  className="w-14 h-14 rounded-2xl object-cover border-2 border-[#16866A]/30 shadow-sm"
                 />
                 <div>
-                  <h3 className="text-base font-bold text-white">{selectedNode.name}</h3>
-                  <p className="text-xs text-slate-400">{selectedNode.college}</p>
-                  <div className="flex items-center gap-1 text-xs text-amber-400 mt-0.5 font-bold">
-                    <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <h3 className="text-base font-bold text-[#164E41]">{selectedNode.name}</h3>
+                  <p className="text-xs text-[#527568]">{selectedNode.college}</p>
+                  <div className="flex items-center gap-1 text-xs text-amber-500 mt-0.5 font-bold">
+                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
                     <span>{selectedNode.rating || 5.0}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 space-y-2 text-xs">
+              <div className="p-3.5 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] space-y-2 text-xs">
                 <div>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                  <span className="text-[10px] font-bold text-[#527568] uppercase tracking-wider block">
                     Key Skill Offered:
                   </span>
-                  <span className="font-bold text-[#b7a4ff]">{selectedNode.topTeach}</span>
+                  <span className="font-bold text-[#16866A]">{selectedNode.topTeach}</span>
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                  <span className="text-[10px] font-bold text-[#527568] uppercase tracking-wider block">
                     Learning Goal:
                   </span>
-                  <span className="font-bold text-[#39d5f6]">{selectedNode.topLearn}</span>
+                  <span className="font-bold text-[#164E41]">{selectedNode.topLearn}</span>
                 </div>
               </div>
 
               {/* Connected Peers in Graph */}
               <div className="space-y-2">
-                <span className="text-xs font-bold text-white uppercase tracking-wider block">
+                <span className="text-xs font-bold text-[#164E41] uppercase tracking-wider block">
                   Compatible Matches in Network:
                 </span>
                 <div className="space-y-1.5">
@@ -258,10 +258,10 @@ export default function CompatibilityMapPage({ setCurrentView }) {
                         <div
                           key={idx}
                           onClick={() => setSelectedNode(otherNode)}
-                          className="p-2 rounded-xl bg-white/5 hover:bg-white/10 cursor-pointer flex items-center justify-between text-xs transition-colors"
+                          className="p-2.5 rounded-xl bg-[#F1FAF5] hover:bg-[#E4F6EE] border border-[#D5E9DF] cursor-pointer flex items-center justify-between text-xs transition-colors"
                         >
-                          <span className="text-slate-200 font-medium">{otherNode.name}</span>
-                          <span className="text-[10px] font-bold text-[#39d5f6] px-2 py-0.5 rounded-full bg-[#39d5f6]/10">
+                          <span className="text-[#164E41] font-medium">{otherNode.name}</span>
+                          <span className="text-[10px] font-bold text-[#16866A] px-2 py-0.5 rounded-full bg-[#E4F6EE] border border-[#D5E9DF]">
                             {link.strength}% Mutual
                           </span>
                         </div>
@@ -273,7 +273,7 @@ export default function CompatibilityMapPage({ setCurrentView }) {
               <div className="pt-2 flex flex-col gap-2">
                 <button
                   onClick={() => setCurrentView(`profile_${selectedNode.id}`)}
-                  className="w-full py-2.5 rounded-xl text-xs font-semibold text-slate-200 glass-panel hover:bg-white/10"
+                  className="w-full py-2.5 rounded-xl text-xs font-semibold text-[#164E41] bg-[#F1FAF5] border border-[#D5E9DF] hover:bg-[#E4F6EE] cursor-pointer transition-colors"
                 >
                   View Full Profile
                 </button>
@@ -282,7 +282,7 @@ export default function CompatibilityMapPage({ setCurrentView }) {
                     const fullUser = await api.getUser(selectedNode.id);
                     setActiveProposalUser(fullUser.user);
                   }}
-                  className="w-full py-2.5 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-lg shadow-[#7657ff]/20 flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-xl font-bold text-xs text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center justify-center gap-1.5 cursor-pointer transition-all"
                 >
                   <Repeat className="w-3.5 h-3.5" />
                   <span>Propose Exchange</span>
@@ -290,7 +290,7 @@ export default function CompatibilityMapPage({ setCurrentView }) {
               </div>
             </div>
           ) : (
-            <div className="py-16 text-center text-xs text-slate-400">
+            <div className="py-16 text-center text-xs text-[#527568]">
               Click any node on the graph to view student exchange details
             </div>
           )}

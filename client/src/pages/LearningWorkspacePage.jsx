@@ -132,8 +132,8 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
   if (loading) {
     return (
       <div className="py-24 text-center">
-        <div className="w-10 h-10 border-2 border-[#7657ff] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-        <p className="text-xs text-slate-400">Loading learning workspace...</p>
+        <div className="w-10 h-10 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <p className="text-xs text-[#527568]">Loading learning workspace...</p>
       </div>
     );
   }
@@ -141,10 +141,10 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
   if (!exchange) {
     return (
       <div className="max-w-md mx-auto py-24 text-center space-y-4">
-        <p className="text-white">Workspace not found.</p>
+        <p className="text-[#164E41] font-semibold">Workspace not found.</p>
         <button
           onClick={() => setCurrentView('dashboard')}
-          className="text-xs text-[#39d5f6] hover:underline"
+          className="text-xs text-[#16866A] hover:underline cursor-pointer font-bold"
         >
           Return to Dashboard
         </button>
@@ -169,7 +169,7 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
       <div className="flex items-center justify-between">
         <button
           onClick={() => setCurrentView('dashboard')}
-          className="text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors"
+          className="text-xs font-semibold text-[#527568] hover:text-[#164E41] flex items-center gap-1.5 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Dashboard</span>
@@ -178,9 +178,9 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
           {exchange.conversationId && (
             <button
               onClick={() => setCurrentView(`messages_${exchange.conversationId}`)}
-              className="px-3.5 py-1.5 rounded-xl glass-card text-xs font-bold text-slate-200 hover:text-white flex items-center gap-1.5"
+              className="px-3.5 py-1.5 rounded-xl bg-white border border-[#D5E9DF] text-xs font-bold text-[#164E41] hover:bg-[#F1FAF5] flex items-center gap-1.5 cursor-pointer shadow-xs"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-[#39d5f6]" />
+              <MessageSquare className="w-3.5 h-3.5 text-[#16866A]" />
               <span>Chat with {partner?.name.split(' ')[0]}</span>
             </button>
           )}
@@ -188,7 +188,7 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
             href={meetingLink}
             target="_blank"
             rel="noreferrer"
-            className="px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#10b981] to-[#39d5f6] hover:opacity-95 shadow-md flex items-center gap-1.5"
+            className="px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center gap-1.5 cursor-pointer transition-all"
           >
             <Video className="w-4 h-4" />
             <span>Launch Video Call</span>
@@ -197,58 +197,52 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
       </div>
 
       {successBanner && (
-        <div className="p-4 rounded-2xl bg-[#10b981]/20 border border-[#10b981]/40 text-[#10b981] text-xs font-bold flex items-center gap-2">
+        <div className="p-4 rounded-2xl bg-[#E4F6EE] border border-[#A8E6CF] text-[#16866A] text-xs font-bold flex items-center gap-2">
           <CheckCircle className="w-4 h-4" />
           <span>{successBanner}</span>
         </div>
       )}
 
       {/* Header Workspace Banner */}
-      <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 shadow-2xl relative overflow-hidden">
+      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5E9DF] shadow-xs relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#39d5f6]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#16866A]">
                 Dedicated Learning Workspace
               </span>
-              <span
-                className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                  exchange.status === 'completed'
-                    ? 'bg-[#10b981]/20 text-[#10b981]'
-                    : 'bg-[#7657ff]/20 text-[#b7a4ff]'
-                }`}
-              >
+              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF]">
                 {exchange.status === 'completed' ? 'Completed' : 'Active Exchange'}
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-              {exchange.skillOffered} <span className="text-[#39d5f6]">⇄</span> {exchange.skillRequested}
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#164E41]">
+              {exchange.skillOffered} <span className="text-[#16866A]">⇄</span> {exchange.skillRequested}
             </h1>
 
-            <p className="text-xs text-slate-300">
-              Exchange between <strong className="text-white">{exchange.sender?.name}</strong> and{' '}
-              <strong className="text-white">{exchange.receiver?.name}</strong>
+            <p className="text-xs text-[#527568]">
+              Exchange between <strong className="text-[#164E41]">{exchange.sender?.name}</strong> and{' '}
+              <strong className="text-[#164E41]">{exchange.receiver?.name}</strong>
             </p>
           </div>
 
           {/* Mutual Completion Status & Confirmation */}
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 shrink-0 min-w-[280px]">
-            <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-amber-400" />
+          <div className="p-4 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] space-y-3 shrink-0 min-w-[280px]">
+            <h4 className="text-xs font-bold text-[#164E41] flex items-center gap-1.5">
+              <Award className="w-4 h-4 text-amber-500" />
               <span>Completion Verification</span>
             </h4>
 
             <div className="space-y-1.5 text-[11px]">
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Your Confirmation:</span>
-                <span className={`font-bold ${userConfirmed ? 'text-[#10b981]' : 'text-amber-400'}`}>
+                <span className="text-[#527568]">Your Confirmation:</span>
+                <span className={`font-bold ${userConfirmed ? 'text-[#16866A]' : 'text-amber-500'}`}>
                   {userConfirmed ? '✓ Confirmed' : 'Pending'}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Partner Confirmation:</span>
-                <span className={`font-bold ${partnerConfirmed ? 'text-[#10b981]' : 'text-amber-400'}`}>
+                <span className="text-[#527568]">Partner Confirmation:</span>
+                <span className={`font-bold ${partnerConfirmed ? 'text-[#16866A]' : 'text-amber-500'}`}>
                   {partnerConfirmed ? '✓ Confirmed' : 'Pending'}
                 </span>
               </div>
@@ -257,19 +251,19 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
             {!userConfirmed ? (
               <button
                 onClick={handleConfirmCompletion}
-                className="w-full py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-md shadow-[#7657ff]/25"
+                className="w-full py-2 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 cursor-pointer transition-all"
               >
                 Confirm I Completed Sessions
               </button>
             ) : exchange.status === 'completed' ? (
               <button
                 onClick={() => setReviewModalOpen(true)}
-                className="w-full py-2 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/20 border border-amber-500/30 hover:bg-amber-500/30"
+                className="w-full py-2 rounded-xl text-xs font-bold text-amber-700 bg-amber-100 border border-amber-300 hover:bg-amber-200 cursor-pointer"
               >
                 ★ Rate & Review Partner
               </button>
             ) : (
-              <p className="text-[10px] text-center text-slate-400 italic">
+              <p className="text-[10px] text-center text-[#527568] italic">
                 Awaiting partner confirmation to finalize.
               </p>
             )}
@@ -282,13 +276,13 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
         {/* Left Column: Shared Notes & Objectives Checklist (7 Cols) */}
         <div className="lg:col-span-7 space-y-8">
           {/* Progress Checklist */}
-          <div className="glass-card rounded-3xl p-6 sm:p-7 space-y-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-7 space-y-4 border border-[#D5E9DF] shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-[#10b981]" />
-                <h3 className="text-base font-bold text-white">Milestone Checklist</h3>
+                <CheckCircle className="w-4 h-4 text-[#16866A]" />
+                <h3 className="text-base font-bold text-[#164E41]">Milestone Checklist</h3>
               </div>
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-[#527568]">
                 {checklist.filter(c => c.completed).length} of {checklist.length} done
               </span>
             </div>
@@ -297,18 +291,18 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
               {checklist.map((item) => (
                 <div
                   key={item.id}
-                  className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between gap-3 group"
+                  className="p-3 rounded-xl bg-[#F1FAF5] border border-[#D5E9DF] flex items-center justify-between gap-3 group"
                 >
                   <label className="flex items-center gap-3 cursor-pointer flex-1">
                     <input
                       type="checkbox"
                       checked={item.completed}
                       onChange={() => handleToggleChecklist(item.id)}
-                      className="w-4 h-4 rounded text-[#7657ff] focus:ring-[#7657ff]"
+                      className="w-4 h-4 rounded text-[#16866A] focus:ring-[#16866A] accent-[#16866A]"
                     />
                     <span
                       className={`text-xs ${
-                        item.completed ? 'line-through text-slate-500' : 'text-slate-200'
+                        item.completed ? 'line-through text-[#527568]/60' : 'text-[#164E41] font-medium'
                       }`}
                     >
                       {item.text}
@@ -316,7 +310,7 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
                   </label>
                   <button
                     onClick={() => handleDeleteChecklist(item.id)}
-                    className="opacity-0 group-hover:opacity-100 p-1 text-slate-500 hover:text-rose-400 transition-opacity"
+                    className="opacity-0 group-hover:opacity-100 p-1 text-[#527568] hover:text-rose-500 transition-opacity cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
@@ -330,11 +324,11 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
                 placeholder="Add session milestone or learning goal..."
                 value={newChecklistText}
                 onChange={(e) => setNewChecklistText(e.target.value)}
-                className="flex-1 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#7657ff]"
+                className="flex-1 px-3.5 py-2 rounded-xl bg-white border border-[#C8DFD3] text-xs text-[#164E41] placeholder-[#527568]/60 focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
               />
               <button
                 type="submit"
-                className="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-[#7657ff] hover:bg-[#7657ff]/90 flex items-center gap-1"
+                className="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center gap-1 cursor-pointer transition-all"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add</span>
@@ -343,16 +337,16 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
           </div>
 
           {/* Shared Session Notes */}
-          <div className="glass-card rounded-3xl p-6 sm:p-7 space-y-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-7 space-y-4 border border-[#D5E9DF] shadow-xs">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4 text-[#7657ff]" />
-                <h3 className="text-base font-bold text-white">Shared Workspace Notes</h3>
+                <FileText className="w-4 h-4 text-[#16866A]" />
+                <h3 className="text-base font-bold text-[#164E41]">Shared Workspace Notes</h3>
               </div>
               <button
                 onClick={handleSaveNotes}
                 disabled={savingNotes}
-                className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-sm flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center gap-1.5 cursor-pointer transition-all"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>{savingNotes ? 'Saving...' : 'Save Notes'}</span>
@@ -364,7 +358,7 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Record takeaways, code snippets, project links, questions, and action items discussed during your peer exchange sessions..."
-              className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-slate-200 placeholder-slate-500 font-mono leading-relaxed focus:outline-none focus:border-[#7657ff]"
+              className="w-full p-4 rounded-2xl bg-[#F1FAF5] border border-[#C8DFD3] text-xs text-[#164E41] placeholder-[#527568]/60 font-mono leading-relaxed focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
             />
           </div>
         </div>
@@ -372,15 +366,15 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
         {/* Right Column: Resource Links & Exchange Overview (5 Cols) */}
         <div className="lg:col-span-5 space-y-8">
           {/* Resource Links */}
-          <div className="glass-card rounded-3xl p-6 sm:p-7 space-y-4">
+          <div className="bg-white rounded-3xl p-6 sm:p-7 space-y-4 border border-[#D5E9DF] shadow-xs">
             <div className="flex items-center gap-2">
-              <Link2 className="w-4 h-4 text-[#39d5f6]" />
-              <h3 className="text-base font-bold text-white">Shared Learning Resources</h3>
+              <Link2 className="w-4 h-4 text-[#16866A]" />
+              <h3 className="text-base font-bold text-[#164E41]">Shared Learning Resources</h3>
             </div>
 
             <div className="space-y-2">
               {resourceLinks.length === 0 ? (
-                <p className="text-xs text-slate-500 italic py-2">
+                <p className="text-xs text-[#527568] italic py-2">
                   No resources added yet. Add GitHub repos, Figma files, documentation, or tutorial links below.
                 </p>
               ) : (
@@ -390,24 +384,24 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
                     href={link.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="p-3 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between text-xs text-slate-200 hover:bg-white/10 transition-colors group"
+                    className="p-3 rounded-xl bg-[#F1FAF5] border border-[#D5E9DF] flex items-center justify-between text-xs text-[#164E41] hover:bg-[#E4F6EE] transition-colors group"
                   >
-                    <span className="font-semibold text-white group-hover:text-[#39d5f6] transition-colors truncate max-w-[220px]">
+                    <span className="font-semibold text-[#164E41] group-hover:text-[#16866A] transition-colors truncate max-w-[220px]">
                       {link.title}
                     </span>
-                    <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-white shrink-0" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#527568] group-hover:text-[#164E41] shrink-0" />
                   </a>
                 ))
               )}
             </div>
 
-            <form onSubmit={handleAddLink} className="space-y-2 pt-2 border-t border-white/5">
+            <form onSubmit={handleAddLink} className="space-y-2 pt-2 border-t border-[#D5E9DF]">
               <input
                 type="text"
                 placeholder="Resource Title (e.g. Figma Tokens File)"
                 value={newLinkTitle}
                 onChange={(e) => setNewLinkTitle(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#39d5f6]"
+                className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#C8DFD3] text-xs text-[#164E41] placeholder-[#527568]/60 focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
               />
               <div className="flex gap-2">
                 <input
@@ -415,11 +409,11 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
                   placeholder="URL (https://...)"
                   value={newLinkUrl}
                   onChange={(e) => setNewLinkUrl(e.target.value)}
-                  className="flex-1 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#39d5f6]"
+                  className="flex-1 px-3.5 py-2 rounded-xl bg-white border border-[#C8DFD3] text-xs text-[#164E41] placeholder-[#527568]/60 focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
                 />
                 <button
                   type="submit"
-                  className="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-[#39d5f6]/20 border border-[#39d5f6]/30 text-[#39d5f6] hover:bg-[#39d5f6]/30"
+                  className="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A] hover:bg-[#A8E6CF]/30 cursor-pointer transition-colors"
                 >
                   Add Link
                 </button>
@@ -428,19 +422,19 @@ export default function LearningWorkspacePage({ exchangeId, setCurrentView }) {
           </div>
 
           {/* Video Room Info Box */}
-          <div className="glass-card rounded-3xl p-6 space-y-3">
+          <div className="bg-white rounded-3xl p-6 space-y-3 border border-[#D5E9DF] shadow-xs">
             <div className="flex items-center gap-2">
-              <Video className="w-4 h-4 text-[#10b981]" />
-              <h4 className="text-xs font-bold text-white">Private Video Room</h4>
+              <Video className="w-4 h-4 text-[#16866A]" />
+              <h4 className="text-xs font-bold text-[#164E41]">Private Video Room</h4>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-[#527568] leading-relaxed">
               Every accepted exchange gets an encrypted, zero-download peer meeting room powered by Jitsi Meet.
             </p>
             <a
               href={meetingLink}
               target="_blank"
               rel="noreferrer"
-              className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#10b981] hover:bg-[#10b981]/90 flex items-center justify-center gap-2"
+              className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 flex items-center justify-center gap-2 cursor-pointer transition-all"
             >
               <Video className="w-3.5 h-3.5" />
               <span>Enter Call Now</span>

@@ -46,6 +46,7 @@ export const api = {
   login: (credentials) => apiRequest('/auth/login', { method: 'POST', body: credentials }),
   register: (userData) => apiRequest('/auth/register', { method: 'POST', body: userData }),
   forgotPasswordSendOtp: (identifier) => apiRequest('/auth/forgot-password/send-otp', { method: 'POST', body: { identifier } }),
+  forgotPasswordVerifyOtp: (identifier, otp) => apiRequest('/auth/forgot-password/verify-otp', { method: 'POST', body: { identifier, otp } }),
   forgotPasswordReset: (data) => apiRequest('/auth/forgot-password/reset', { method: 'POST', body: data }),
   getMe: () => apiRequest('/auth/me'),
 

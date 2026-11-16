@@ -6,7 +6,6 @@ import {
   GraduationCap,
   MessageSquare,
   Clock,
-  UserCheck,
   Send,
   Loader2,
   X
@@ -70,31 +69,31 @@ export default function ExploreSkillsPage({ onOpenChat }) {
       {/* Header and Search */}
       <div className="space-y-4">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#39d5f6]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#16866A]">
             Skill Discovery
           </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight mt-1">
+          <h1 className="text-3xl sm:text-4xl font-black text-[#164E41] tracking-tight mt-1">
             Explore Skills
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+          <p className="text-xs sm:text-sm text-[#527568] mt-1 max-w-2xl">
             Find peers who can teach what you want to learn, and share what you already know.
           </p>
         </div>
 
         {/* Functional Search Bar */}
         <div className="relative max-w-2xl">
-          <Search className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-5 h-5 text-[#527568] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="Search by skill name (e.g. Python, UI Design, React, Guitar)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-10 py-3.5 rounded-2xl glass-panel text-xs sm:text-sm text-white placeholder-slate-400 border border-white/15 focus:outline-none focus:border-[#7657ff] focus:ring-1 focus:ring-[#7657ff]"
+            className="w-full pl-12 pr-10 py-3.5 rounded-2xl bg-white text-xs sm:text-sm text-[#164E41] placeholder-[#527568]/60 border border-[#C8DFD3] shadow-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#527568] hover:text-[#164E41] cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -103,7 +102,7 @@ export default function ExploreSkillsPage({ onOpenChat }) {
       </div>
 
       {errorMsg && (
-        <div className="p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs">
+        <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs">
           {errorMsg}
         </div>
       )}
@@ -111,16 +110,16 @@ export default function ExploreSkillsPage({ onOpenChat }) {
       {/* Grid of User Cards */}
       {loading ? (
         <div className="py-24 text-center space-y-3">
-          <div className="w-10 h-10 border-2 border-[#7657ff] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-slate-400">Loading completed learner profiles...</p>
+          <div className="w-10 h-10 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs text-[#527568]">Loading completed learner profiles...</p>
         </div>
       ) : users.length === 0 ? (
-        <div className="glass-panel rounded-3xl p-12 text-center max-w-lg mx-auto border border-white/15 space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-slate-400">
+        <div className="bg-white rounded-3xl p-12 text-center max-w-lg mx-auto border border-[#D5E9DF] shadow-xs space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] flex items-center justify-center mx-auto text-[#527568]">
             <Search className="w-6 h-6" />
           </div>
-          <h3 className="text-base font-bold text-white">No Profiles Found</h3>
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <h3 className="text-base font-bold text-[#164E41]">No Profiles Found</h3>
+          <p className="text-xs text-[#527568] leading-relaxed">
             {searchQuery
               ? `No registered learners matched the skill query "${searchQuery}". Try a different skill name or clear the search.`
               : 'There are no other learners with completed profiles yet. Register a second account to test skill exchanges, or invite fellow learners!'}
@@ -128,7 +127,7 @@ export default function ExploreSkillsPage({ onOpenChat }) {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/10"
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-[#164E41] bg-[#F1FAF5] hover:bg-[#E4F6EE] border border-[#D5E9DF] cursor-pointer"
             >
               Clear Search Filter
             </button>
@@ -144,24 +143,24 @@ export default function ExploreSkillsPage({ onOpenChat }) {
               <div
                 key={targetUser.id}
                 tabIndex={0}
-                className="glass-panel rounded-3xl p-6 border border-white/15 flex flex-col justify-between space-y-5 shadow-xl group skill-card-hover cursor-default focus:outline-none"
+                className="bg-white rounded-3xl p-6 border border-[#D5E9DF] flex flex-col justify-between space-y-5 shadow-xs hover:border-[#A8E6CF] transition-all group skill-card-hover cursor-default focus:outline-none"
               >
                 {/* 1. Profile Picture & 2. Full Name & 3. Institute Name */}
                 <div className="flex items-start gap-4">
                   <img
                     src={targetUser.avatar}
                     alt={targetUser.name}
-                    className="w-16 h-16 rounded-2xl object-cover border-2 border-[#7657ff]/30 shadow-md shrink-0"
+                    className="w-16 h-16 rounded-2xl object-cover border-2 border-[#D5E9DF] shadow-xs shrink-0"
                   />
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-base font-bold text-white truncate group-hover:text-[#39d5f6] transition-colors">
+                    <h3 className="text-base font-bold text-[#164E41] truncate group-hover:text-[#16866A] transition-colors">
                       {targetUser.name}
                     </h3>
-                    <p className="text-xs text-slate-300 flex items-center gap-1.5 mt-0.5 truncate">
-                      <GraduationCap className="w-3.5 h-3.5 text-[#39d5f6] shrink-0" />
+                    <p className="text-xs text-[#527568] flex items-center gap-1.5 mt-0.5 truncate">
+                      <GraduationCap className="w-3.5 h-3.5 text-[#16866A] shrink-0" />
                       <span className="truncate">{targetUser.instituteName || 'Independent Learner'}</span>
                     </p>
-                    <p className="text-[11px] font-mono text-slate-400 mt-0.5">
+                    <p className="text-[11px] font-mono text-[#527568]/80 mt-0.5">
                       @{targetUser.username || targetUser.bridgeAccount}
                     </p>
                   </div>
@@ -169,7 +168,7 @@ export default function ExploreSkillsPage({ onOpenChat }) {
 
                 {/* 4. Skills They Can Teach */}
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#39d5f6] uppercase tracking-wider">
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#16866A] uppercase tracking-wider">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Can Teach</span>
                   </div>
@@ -180,22 +179,22 @@ export default function ExploreSkillsPage({ onOpenChat }) {
                         return (
                           <span
                             key={idx}
-                            className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#39d5f6]/15 border border-[#39d5f6]/30 text-[#39d5f6]"
+                            className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A]"
                           >
                             {name}
                           </span>
                         );
                       })
                     ) : (
-                      <span className="text-xs text-slate-500">None listed</span>
+                      <span className="text-xs text-[#527568]/70">None listed</span>
                     )}
                   </div>
                 </div>
 
                 {/* 5. Skills They Want to Learn */}
                 <div className="space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#b7a4ff] uppercase tracking-wider">
-                    <BookOpen className="w-3.5 h-3.5" />
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#164E41] uppercase tracking-wider">
+                    <BookOpen className="w-3.5 h-3.5 text-[#527568]" />
                     <span>Wants to Learn</span>
                   </div>
                   <div className="flex flex-wrap gap-1.5 min-h-[28px]">
@@ -205,28 +204,28 @@ export default function ExploreSkillsPage({ onOpenChat }) {
                         return (
                           <span
                             key={idx}
-                            className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#7657ff]/20 border border-[#7657ff]/35 text-[#b7a4ff]"
+                            className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#F1FAF5] border border-[#D5E9DF] text-[#527568]"
                           >
                             {name}
                           </span>
                         );
                       })
                     ) : (
-                      <span className="text-xs text-slate-500">None listed</span>
+                      <span className="text-xs text-[#527568]/70">None listed</span>
                     )}
                   </div>
                 </div>
 
                 {/* 6. Connect Button or Connection Status */}
-                <div className="pt-2 border-t border-white/10">
+                <div className="pt-2 border-t border-[#D5E9DF]">
                   {status === 'none' ? (
                     <button
                       onClick={() => handleConnect(targetUser)}
                       disabled={isConnecting}
-                      className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-md shadow-[#7657ff]/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                      className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-sm shadow-[#16866A]/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       {isConnecting ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
                       ) : (
                         <Send className="w-3.5 h-3.5" />
                       )}
@@ -236,20 +235,20 @@ export default function ExploreSkillsPage({ onOpenChat }) {
                     targetUser.isRequester ? (
                       <button
                         disabled
-                        className="w-full py-2.5 rounded-xl text-xs font-bold text-amber-300 bg-amber-500/15 border border-amber-500/30 flex items-center justify-center gap-2 cursor-not-allowed select-none"
+                        className="w-full py-2.5 rounded-xl text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 flex items-center justify-center gap-2 cursor-not-allowed select-none"
                       >
                         <Clock className="w-3.5 h-3.5" />
                         <span>Pending</span>
                       </button>
                     ) : (
-                      <div className="w-full py-2 rounded-xl text-xs font-bold text-cyan-300 bg-cyan-500/15 border border-cyan-500/30 text-center">
+                      <div className="w-full py-2 rounded-xl text-xs font-bold text-[#16866A] bg-[#E4F6EE] border border-[#D5E9DF] text-center">
                         Request Received (Check Notifications)
                       </div>
                     )
                   ) : status === 'accepted' ? (
                     <button
                       onClick={() => onOpenChat && onOpenChat(targetUser.connectionId)}
-                      className="w-full py-2.5 rounded-xl text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/35 flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                      className="w-full py-2.5 rounded-xl text-xs font-bold text-[#16866A] bg-[#E4F6EE] hover:bg-[#D5E9DF] border border-[#D5E9DF] flex items-center justify-center gap-2 transition-colors cursor-pointer"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
                       <span>Connected • Open Chat</span>
@@ -257,7 +256,7 @@ export default function ExploreSkillsPage({ onOpenChat }) {
                   ) : (
                     <button
                       onClick={() => handleConnect(targetUser)}
-                      className="w-full py-2.5 rounded-xl text-xs font-semibold text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center gap-2 transition-colors"
+                      className="w-full py-2.5 rounded-xl text-xs font-semibold text-[#527568] bg-[#F1FAF5] hover:bg-[#E4F6EE] border border-[#D5E9DF] flex items-center justify-center gap-2 transition-colors cursor-pointer"
                     >
                       <span>Declined • Connect Again</span>
                     </button>

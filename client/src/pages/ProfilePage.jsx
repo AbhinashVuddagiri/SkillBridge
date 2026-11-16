@@ -201,10 +201,10 @@ export default function ProfilePage({ setCurrentView }) {
   if (!user) {
     return (
       <div className="max-w-md mx-auto py-24 px-4 text-center space-y-4">
-        <p className="text-white">Please sign in to update your profile.</p>
+        <p className="text-[#164E41] font-semibold">Please sign in to update your profile.</p>
         <button
           onClick={() => openAuth('login')}
-          className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6]"
+          className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md cursor-pointer"
         >
           Sign In
         </button>
@@ -342,13 +342,13 @@ export default function ProfilePage({ setCurrentView }) {
       <div className="space-y-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#39d5f6]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#16866A]">
               Profile & Account
             </span>
-            <h1 className="text-3xl font-black text-white tracking-tight mt-1">
+            <h1 className="text-3xl font-black text-[#164E41] tracking-tight mt-1">
               Update Profile
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-[#527568]">
               Manage your credentials, teaching capabilities, and learning interests.
             </p>
           </div>
@@ -356,8 +356,8 @@ export default function ProfilePage({ setCurrentView }) {
           <div className="flex items-center gap-2">
             <span className={`inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-full border ${
               isProfileComplete
-                ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300'
-                : 'bg-amber-500/15 border-amber-500/30 text-amber-300'
+                ? 'bg-[#E4F6EE] border-[#D5E9DF] text-[#16866A]'
+                : 'bg-amber-50 border-amber-200 text-amber-700'
             }`}>
               {isProfileComplete ? (
                 <>
@@ -377,15 +377,15 @@ export default function ProfilePage({ setCurrentView }) {
 
       {/* Notifications */}
       {successMsg && (
-        <div className="p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs flex items-center justify-between gap-3 animate-in fade-in">
+        <div className="p-4 rounded-2xl bg-[#E4F6EE] border border-[#A8E6CF] text-[#16866A] text-xs flex items-center justify-between gap-3 animate-in fade-in">
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-4 h-4 shrink-0 text-emerald-400" />
+            <CheckCircle className="w-4 h-4 shrink-0 text-[#16866A]" />
             <span>{successMsg}</span>
           </div>
           {isProfileComplete && (
             <button
               onClick={() => setCurrentView('explore')}
-              className="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-white font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
+              className="px-3 py-1.5 rounded-xl bg-[#16866A] hover:bg-[#0F7058] text-white font-bold text-xs flex items-center gap-1 transition-colors shrink-0"
             >
               <span>Explore Skills</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -395,8 +395,8 @@ export default function ProfilePage({ setCurrentView }) {
       )}
 
       {errorMsg && (
-        <div className="p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2 animate-in fade-in">
-          <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2 animate-in fade-in">
+          <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
           <span>{errorMsg}</span>
         </div>
       )}
@@ -404,9 +404,9 @@ export default function ProfilePage({ setCurrentView }) {
       {/* Main Profile Form */}
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Card 1: Identity & Avatar */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 space-y-6 shadow-xl">
-          <h2 className="text-base font-bold text-white flex items-center gap-2 border-b border-white/10 pb-3">
-            <User className="w-4 h-4 text-[#7657ff]" />
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5E9DF] space-y-6 shadow-xs">
+          <h2 className="text-base font-bold text-[#164E41] flex items-center gap-2 border-b border-[#D5E9DF] pb-3">
+            <User className="w-4 h-4 text-[#16866A]" />
             <span>Profile Identity</span>
           </h2>
 
@@ -416,11 +416,11 @@ export default function ProfilePage({ setCurrentView }) {
               <img
                 src={avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.bridgeAccount)}`}
                 alt={user.name}
-                className="w-24 h-24 rounded-2xl object-cover border-2 border-[#7657ff]/40 shadow-xl"
+                className="w-24 h-24 rounded-2xl object-cover border-2 border-[#16866A]/30 shadow-md"
               />
               <label
                 htmlFor="avatar-upload"
-                className="absolute inset-0 rounded-2xl bg-black/50 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white text-[10px] font-semibold cursor-pointer transition-opacity"
+                className="absolute inset-0 rounded-2xl bg-[#164E41]/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white text-[10px] font-semibold cursor-pointer transition-opacity"
               >
                 <Camera className="w-5 h-5 mb-1" />
                 <span>Change</span>
@@ -439,7 +439,7 @@ export default function ProfilePage({ setCurrentView }) {
               <div className="flex flex-wrap items-center gap-2 justify-center sm:justify-start">
                 <label
                   htmlFor="avatar-upload-btn"
-                  className="px-3.5 py-2 rounded-xl text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/15 cursor-pointer transition-colors"
+                  className="px-3.5 py-2 rounded-xl text-xs font-semibold text-[#164E41] bg-[#F1FAF5] hover:bg-[#E4F6EE] border border-[#D5E9DF] cursor-pointer transition-colors"
                 >
                   Upload New Photo
                 </label>
@@ -454,13 +454,13 @@ export default function ProfilePage({ setCurrentView }) {
                 <button
                   type="button"
                   onClick={handleRandomizeAvatar}
-                  className="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 flex items-center gap-1.5 transition-colors"
+                  className="px-3.5 py-2 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] bg-[#F1FAF5] hover:bg-[#E4F6EE] border border-[#D5E9DF] flex items-center gap-1.5 transition-colors cursor-pointer"
                 >
                   <RefreshCw className="w-3.5 h-3.5" />
                   <span>Randomize Avatar</span>
                 </button>
               </div>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-[#527568]">
                 Supports JPG, PNG, WebP or SVG up to 5MB. Stored securely.
               </p>
             </div>
@@ -469,8 +469,8 @@ export default function ProfilePage({ setCurrentView }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             {/* Full Name */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
-                <User className="w-3.5 h-3.5 text-[#39d5f6]" /> Full Name *
+              <label className="block text-xs font-semibold text-[#164E41] mb-1 flex items-center gap-1">
+                <User className="w-3.5 h-3.5 text-[#16866A]" /> Full Name *
               </label>
               <input
                 type="text"
@@ -478,14 +478,14 @@ export default function ProfilePage({ setCurrentView }) {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Your Full Name"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#7657ff]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
               />
             </div>
 
             {/* Institute Name */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
-                <Building className="w-3.5 h-3.5 text-[#39d5f6]" /> Institute Name *
+              <label className="block text-xs font-semibold text-[#164E41] mb-1 flex items-center gap-1">
+                <Building className="w-3.5 h-3.5 text-[#16866A]" /> Institute Name *
               </label>
               <input
                 type="text"
@@ -493,22 +493,22 @@ export default function ProfilePage({ setCurrentView }) {
                 value={instituteName}
                 onChange={(e) => setInstituteName(e.target.value)}
                 placeholder="e.g. Stanford University or Self-Taught"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#7657ff]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
               />
             </div>
 
             {/* Username (Read Only) */}
             <div className="sm:col-span-2">
-              <label className="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
-                <AtSign className="w-3.5 h-3.5 text-[#7657ff]" /> Username Handle
+              <label className="block text-xs font-semibold text-[#164E41] mb-1 flex items-center gap-1">
+                <AtSign className="w-3.5 h-3.5 text-[#16866A]" /> Username Handle
               </label>
               <input
                 type="text"
                 disabled
                 value={`@${user.username || user.bridgeAccount}`}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/5 text-slate-400 font-mono text-xs cursor-not-allowed select-none"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F1FAF5] border border-[#D5E9DF] text-[#527568] font-mono text-xs cursor-not-allowed select-none"
               />
-              <p className="text-[10px] text-slate-500 mt-1">
+              <p className="text-[10px] text-[#527568] mt-1">
                 Your unique SkillBridge username is locked for security.
               </p>
             </div>
@@ -516,17 +516,17 @@ export default function ProfilePage({ setCurrentView }) {
             {/* Verified Gmail Display */}
             {user.email && (
               <div className="sm:col-span-2">
-                <label className="block text-xs font-semibold text-slate-300 mb-1 flex items-center gap-1">
-                  <Mail className="w-3.5 h-3.5 text-emerald-400" /> Verified Gmail Account
+                <label className="block text-xs font-semibold text-[#164E41] mb-1 flex items-center gap-1">
+                  <Mail className="w-3.5 h-3.5 text-[#16866A]" /> Verified Gmail Account
                 </label>
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
                     disabled
                     value={user.email}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-emerald-500/20 text-emerald-300 font-mono text-xs cursor-not-allowed select-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#E4F6EE] border border-[#A8E6CF] text-[#16866A] font-mono text-xs cursor-not-allowed select-none"
                   />
-                  <span className="text-[11px] text-emerald-400 font-bold shrink-0 flex items-center gap-1">
+                  <span className="text-[11px] text-[#16866A] font-bold shrink-0 flex items-center gap-1">
                     <CheckCircle className="w-3.5 h-3.5" /> Verified
                   </span>
                 </div>
@@ -536,18 +536,18 @@ export default function ProfilePage({ setCurrentView }) {
         </div>
 
         {/* Card 2: Skills You Can Teach */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 space-y-5 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-white/10 pb-3">
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#39d5f6]" />
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5E9DF] space-y-5 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-[#D5E9DF] pb-3">
+            <h2 className="text-base font-bold text-[#164E41] flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#16866A]" />
               <span>Skills You Can Teach</span>
             </h2>
-            <span className="text-[11px] text-slate-400">
+            <span className="text-[11px] text-[#527568]">
               {skillsTeach.length} skill{skillsTeach.length !== 1 ? 's' : ''} added (At least 1 required)
             </span>
           </div>
 
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className="text-xs text-[#527568] leading-relaxed">
             List the skills or topics you are confident sharing with others (e.g. Python, UI Design, Guitar, Video Editing).
           </p>
 
@@ -564,12 +564,12 @@ export default function ProfilePage({ setCurrentView }) {
                   handleAddTeachSkill();
                 }
               }}
-              className="flex-1 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#39d5f6]"
+              className="flex-1 px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
             />
             <button
               type="button"
               onClick={handleAddTeachSkill}
-              className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#39d5f6]/20 hover:bg-[#39d5f6]/30 border border-[#39d5f6]/30 flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add</span>
@@ -579,20 +579,20 @@ export default function ProfilePage({ setCurrentView }) {
           {/* Skills Badges */}
           <div className="flex flex-wrap gap-2 pt-1 min-h-[40px]">
             {skillsTeach.length === 0 ? (
-              <span className="text-xs text-slate-500 italic">
+              <span className="text-xs text-[#527568]/70 italic">
                 No teaching skills added yet. Add at least one skill.
               </span>
             ) : (
               skillsTeach.map((skill) => (
                 <span
                   key={skill}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#39d5f6]/15 border border-[#39d5f6]/30 text-[#39d5f6] text-xs font-semibold shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A] text-xs font-semibold shadow-xs"
                 >
                   <span>{skill}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveTeachSkill(skill)}
-                    className="p-0.5 rounded-full hover:bg-[#39d5f6]/30 text-[#39d5f6] hover:text-white transition-colors"
+                    className="p-0.5 rounded-full hover:bg-[#16866A]/20 text-[#16866A] transition-colors cursor-pointer"
                     title={`Remove ${skill}`}
                   >
                     <X className="w-3 h-3" />
@@ -604,18 +604,18 @@ export default function ProfilePage({ setCurrentView }) {
         </div>
 
         {/* Card 3: Skills You Want to Learn */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 space-y-5 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-white/10 pb-3">
-            <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#7657ff]" />
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5E9DF] space-y-5 shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-[#D5E9DF] pb-3">
+            <h2 className="text-base font-bold text-[#164E41] flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#16866A]" />
               <span>Skills You Want to Learn</span>
             </h2>
-            <span className="text-[11px] text-slate-400">
+            <span className="text-[11px] text-[#527568]">
               {skillsLearn.length} skill{skillsLearn.length !== 1 ? 's' : ''} added (At least 1 required)
             </span>
           </div>
 
-          <p className="text-xs text-slate-300 leading-relaxed">
+          <p className="text-xs text-[#527568] leading-relaxed">
             List the skills you are looking to master from peers on the platform (e.g. Figma, Machine Learning, Spanish).
           </p>
 
@@ -632,12 +632,12 @@ export default function ProfilePage({ setCurrentView }) {
                   handleAddLearnSkill();
                 }
               }}
-              className="flex-1 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#7657ff]"
+              className="flex-1 px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
             />
             <button
               type="button"
               onClick={handleAddLearnSkill}
-              className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#7657ff]/20 hover:bg-[#7657ff]/30 border border-[#7657ff]/30 flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add</span>
@@ -647,20 +647,20 @@ export default function ProfilePage({ setCurrentView }) {
           {/* Skills Badges */}
           <div className="flex flex-wrap gap-2 pt-1 min-h-[40px]">
             {skillsLearn.length === 0 ? (
-              <span className="text-xs text-slate-500 italic">
+              <span className="text-xs text-[#527568]/70 italic">
                 No learning skills added yet. Add at least one skill.
               </span>
             ) : (
               skillsLearn.map((skill) => (
                 <span
                   key={skill}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#7657ff]/20 border border-[#7657ff]/35 text-[#b7a4ff] text-xs font-semibold shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F1FAF5] border border-[#D5E9DF] text-[#164E41] text-xs font-semibold shadow-xs"
                 >
                   <span>{skill}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveLearnSkill(skill)}
-                    className="p-0.5 rounded-full hover:bg-[#7657ff]/30 text-[#b7a4ff] hover:text-white transition-colors"
+                    className="p-0.5 rounded-full hover:bg-[#164E41]/10 text-[#527568] hover:text-[#164E41] transition-colors cursor-pointer"
                     title={`Remove ${skill}`}
                   >
                     <X className="w-3 h-3" />
@@ -676,7 +676,7 @@ export default function ProfilePage({ setCurrentView }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-2xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-xl shadow-[#7657ff]/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-2xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {loading ? (
               <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
@@ -691,14 +691,14 @@ export default function ProfilePage({ setCurrentView }) {
       </form>
 
       {/* DANGER ZONE: Account Deletion (At the very bottom of the profile settings) */}
-      <div className="mt-8 pt-6 border-t border-rose-500/20">
-        <div className="p-6 rounded-3xl bg-rose-500/5 border border-rose-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="mt-8 pt-6 border-t border-rose-200">
+        <div className="p-6 rounded-3xl bg-rose-50/60 border border-rose-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <h3 className="text-sm font-bold text-rose-400 flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-rose-400" />
+            <h3 className="text-sm font-bold text-rose-700 flex items-center gap-2">
+              <AlertTriangle className="w-4 h-4 text-rose-600" />
               <span>Danger Zone • Delete Account</span>
             </h3>
-            <p className="text-xs text-slate-400 max-w-xl">
+            <p className="text-xs text-[#527568] max-w-xl">
               Permanently delete your SkillBridge account, profile, skill listings, connection requests, and messages. This action is irreversible.
             </p>
           </div>
@@ -709,7 +709,7 @@ export default function ProfilePage({ setCurrentView }) {
               resetDeleteModal();
               setDeleteModalOpen(true);
             }}
-            className="px-5 py-2.5 rounded-xl text-xs font-bold text-rose-300 bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/35 transition-colors flex items-center gap-2 shrink-0 cursor-pointer shadow-sm"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-rose-700 bg-rose-100 hover:bg-rose-200 border border-rose-300 transition-colors flex items-center gap-2 shrink-0 cursor-pointer shadow-xs"
           >
             <Trash2 className="w-3.5 h-3.5" />
             <span>Delete Account</span>
@@ -719,8 +719,8 @@ export default function ProfilePage({ setCurrentView }) {
 
       {/* Confirmation Dialog Modal with Multi-Step Password & Gmail OTP Verification Flow */}
       {deleteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md glass-panel rounded-3xl p-6 sm:p-7 shadow-2xl border border-rose-500/30 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#164E41]/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-rose-200 max-h-[90vh] overflow-y-auto">
             {/* Close Button */}
             <button
               onClick={() => {
@@ -729,7 +729,7 @@ export default function ProfilePage({ setCurrentView }) {
                 }
               }}
               disabled={deletingAccount || verifyingPassword || verifyingDeleteOtp}
-              className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors disabled:opacity-50"
+              className="absolute top-5 right-5 p-2 rounded-full text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors disabled:opacity-50"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -737,8 +737,8 @@ export default function ProfilePage({ setCurrentView }) {
 
             {/* Error Message banner */}
             {deleteError && (
-              <div className="p-3.5 rounded-2xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs mb-4 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+              <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs mb-4 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
                 <span>{deleteError}</span>
               </div>
             )}
@@ -749,25 +749,25 @@ export default function ProfilePage({ setCurrentView }) {
             {deleteStep === 2 && (
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0">
                     <Lock className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">Delete Account</h3>
-                    <p className="text-xs text-slate-400 font-medium">Verify your password to proceed</p>
+                    <h3 className="text-lg font-bold text-[#164E41]">Delete Account</h3>
+                    <p className="text-xs text-[#527568] font-medium">Verify your password to proceed</p>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 mb-4 text-xs text-rose-300">
-                  <p className="font-semibold text-rose-200">Warning: Deleting your account is permanent.</p>
-                  <p className="text-slate-300 mt-1">Please enter your current account password to confirm ownership.</p>
+                <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 mb-4 text-xs text-rose-800">
+                  <p className="font-semibold text-rose-800">Warning: Deleting your account is permanent.</p>
+                  <p className="text-[#527568] mt-1">Please enter your current account password to confirm ownership.</p>
                 </div>
 
                 <div className="space-y-3 mb-6">
                   <div>
                     <div className="flex items-center justify-between mb-1.5">
-                      <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                        <Lock className="w-3.5 h-3.5 text-amber-400" />
+                      <label className="text-xs font-semibold text-[#164E41] flex items-center gap-1.5">
+                        <Lock className="w-3.5 h-3.5 text-amber-600" />
                         <span>Current Password *</span>
                       </label>
                       <button
@@ -776,7 +776,7 @@ export default function ProfilePage({ setCurrentView }) {
                           setDeleteStep('otp');
                           setDeleteError('');
                         }}
-                        className="text-[11px] text-[#39d5f6] hover:underline cursor-pointer font-medium"
+                        className="text-[11px] text-[#16866A] hover:underline cursor-pointer font-medium"
                       >
                         Forgot password?
                       </button>
@@ -798,13 +798,13 @@ export default function ProfilePage({ setCurrentView }) {
                           }
                         }}
                         disabled={verifyingPassword}
-                        className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-amber-400 disabled:opacity-60"
+                        className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A] disabled:opacity-60"
                         autoFocus
                       />
                       <button
                         type="button"
                         onClick={() => setShowDeletePassword(!showDeletePassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#527568] hover:text-[#164E41]"
                       >
                         {showDeletePassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
@@ -817,7 +817,7 @@ export default function ProfilePage({ setCurrentView }) {
                     type="button"
                     onClick={resetDeleteModal}
                     disabled={verifyingPassword}
-                    className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] border border-[#D5E9DF] transition-colors cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -826,7 +826,7 @@ export default function ProfilePage({ setCurrentView }) {
                     type="button"
                     disabled={verifyingPassword || !deletePassword.trim()}
                     onClick={handleVerifyPassword}
-                    className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 shadow-lg shadow-amber-500/25 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-700 shadow-md transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
                   >
                     {verifyingPassword ? (
                       <>
@@ -850,23 +850,23 @@ export default function ProfilePage({ setCurrentView }) {
             {deleteStep === 'otp' && (
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#39d5f6]/20 text-[#39d5f6] border border-[#39d5f6]/30 flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF] flex items-center justify-center shrink-0">
                     <KeyRound className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">Verify via Linked Gmail</h3>
-                    <p className="text-xs text-[#39d5f6] font-medium">Forgot Password • Ownership Verification</p>
+                    <h3 className="text-lg font-bold text-[#164E41]">Verify via Linked Gmail</h3>
+                    <p className="text-xs text-[#16866A] font-medium">Forgot Password • Ownership Verification</p>
                   </div>
                 </div>
 
                 {/* Masked linked Gmail display */}
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 mb-4 text-center sm:text-left space-y-1.5">
-                  <p className="text-xs text-slate-300">
+                <div className="p-4 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] mb-4 text-center sm:text-left space-y-1.5">
+                  <p className="text-xs text-[#527568]">
                     {deleteOtpSent
                       ? 'OTP was sent to your registered email:'
                       : 'OTP will be sent to your registered email:'}
                   </p>
-                  <p className="text-sm font-mono font-bold text-emerald-400 bg-emerald-500/10 py-1.5 px-3 rounded-xl border border-emerald-500/20 inline-block tracking-wider">
+                  <p className="text-sm font-mono font-bold text-[#16866A] bg-[#E4F6EE] py-1.5 px-3 rounded-xl border border-[#A8E6CF] inline-block tracking-wider">
                     {maskEmail(user?.email || serverMaskedEmail) || 'your registered email'}
                   </p>
                 </div>
@@ -878,7 +878,7 @@ export default function ProfilePage({ setCurrentView }) {
                       type="button"
                       disabled={sendingDeleteOtp}
                       onClick={handleSendDeleteOtp}
-                      className="w-full py-3 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-lg shadow-[#7657ff]/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                      className="w-full py-3 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       {sendingDeleteOtp ? (
                         <>
@@ -899,7 +899,7 @@ export default function ProfilePage({ setCurrentView }) {
                 {deleteOtpSent && (
                   <div className="space-y-4 mb-4 animate-in fade-in duration-200">
                     <div>
-                      <label htmlFor="delete-account-otp-input" className="block text-xs font-semibold text-slate-300 mb-1.5">
+                      <label htmlFor="delete-account-otp-input" className="block text-xs font-semibold text-[#164E41] mb-1.5">
                         Enter OTP
                       </label>
                       <input
@@ -923,7 +923,7 @@ export default function ProfilePage({ setCurrentView }) {
                           }
                         }}
                         disabled={verifyingDeleteOtp || deleteOtpVerified}
-                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/20 text-white placeholder-slate-500 text-base sm:text-lg font-mono tracking-[0.3em] text-center focus:outline-none focus:border-[#39d5f6] focus:ring-1 focus:ring-[#39d5f6] transition-all disabled:opacity-60"
+                        className="w-full px-4 py-3 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-base sm:text-lg font-mono tracking-[0.3em] text-center focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A] transition-all disabled:opacity-60"
                         autoFocus
                       />
                     </div>
@@ -934,7 +934,7 @@ export default function ProfilePage({ setCurrentView }) {
                           type="button"
                           disabled={verifyingDeleteOtp || deleteOtp.trim().length < 6}
                           onClick={handleVerifyDeleteOtp}
-                          className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-500 hover:opacity-95 shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
+                          className="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40"
                         >
                           {verifyingDeleteOtp ? (
                             <>
@@ -953,10 +953,10 @@ export default function ProfilePage({ setCurrentView }) {
                           type="button"
                           disabled={sendingDeleteOtp || deleteCooldown > 0}
                           onClick={handleSendDeleteOtp}
-                          className="py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40"
+                          className="py-2.5 px-4 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] bg-[#F1FAF5] hover:bg-[#E4F6EE] border border-[#D5E9DF] transition-colors flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-40"
                         >
                           {sendingDeleteOtp ? (
-                            <span className="animate-spin w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full" />
+                            <span className="animate-spin w-3.5 h-3.5 border-2 border-[#16866A] border-t-transparent rounded-full" />
                           ) : (
                             <RotateCw className="w-3.5 h-3.5" />
                           )}
@@ -969,9 +969,9 @@ export default function ProfilePage({ setCurrentView }) {
 
                     {/* Correct OTP -> Email verified badge and continue */}
                     {deleteOtpVerified && (
-                      <div className="p-3.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center justify-between animate-in fade-in duration-200">
+                      <div className="p-3.5 rounded-xl bg-[#E4F6EE] border border-[#A8E6CF] text-[#16866A] text-xs font-semibold flex items-center justify-between animate-in fade-in duration-200">
                         <div className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                          <CheckCircle className="w-4 h-4 text-[#16866A] shrink-0" />
                           <span>Email verified</span>
                         </div>
                         <button
@@ -980,7 +980,7 @@ export default function ProfilePage({ setCurrentView }) {
                             setDeleteStep(3);
                             setDeleteError('');
                           }}
-                          className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-500 hover:opacity-95 shadow-md flex items-center gap-1.5 cursor-pointer transition-all"
+                          className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md flex items-center gap-1.5 cursor-pointer transition-all"
                         >
                           <span>Continue</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -990,14 +990,14 @@ export default function ProfilePage({ setCurrentView }) {
                   </div>
                 )}
 
-                <div className="flex items-center justify-between pt-2 border-t border-white/5">
+                <div className="flex items-center justify-between pt-2 border-t border-[#D5E9DF]">
                   <button
                     type="button"
                     onClick={() => {
                       setDeleteStep(2);
                       setDeleteError('');
                     }}
-                    className="text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    className="text-xs text-[#527568] hover:text-[#164E41] transition-colors cursor-pointer"
                   >
                     ← Verify with password instead
                   </button>
@@ -1005,7 +1005,7 @@ export default function ProfilePage({ setCurrentView }) {
                   <button
                     type="button"
                     onClick={resetDeleteModal}
-                    className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 cursor-pointer"
+                    className="px-4 py-2 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] border border-[#D5E9DF] cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -1019,23 +1019,23 @@ export default function ProfilePage({ setCurrentView }) {
             {deleteStep === 3 && (
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 border border-rose-200 flex items-center justify-center shrink-0">
                     <Trash2 className="w-6 h-6 animate-pulse" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-white">Final Confirmation</h3>
-                    <p className="text-xs text-rose-400 font-semibold">Permanently Delete Account</p>
+                    <h3 className="text-lg font-bold text-[#164E41]">Final Confirmation</h3>
+                    <p className="text-xs text-rose-600 font-semibold">Permanently Delete Account</p>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-rose-500/15 border border-rose-500/35 mb-6 text-xs text-rose-200 leading-relaxed space-y-2">
-                  <p className="font-extrabold text-white text-sm">
+                <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 mb-6 text-xs text-rose-800 leading-relaxed space-y-2">
+                  <p className="font-extrabold text-[#164E41] text-sm">
                     Are you sure you want to permanently delete your account?
                   </p>
-                  <p className="font-semibold text-rose-300">
+                  <p className="font-semibold text-rose-700">
                     This action is permanent and cannot be undone.
                   </p>
-                  <p className="text-slate-300">
+                  <p className="text-[#527568]">
                     All your skills, chat history, connection requests, profile details, and account credentials will be permanently erased immediately.
                   </p>
                 </div>
@@ -1045,7 +1045,7 @@ export default function ProfilePage({ setCurrentView }) {
                     type="button"
                     onClick={resetDeleteModal}
                     disabled={deletingAccount}
-                    className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors cursor-pointer disabled:opacity-50"
+                    className="px-4 py-2.5 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] border border-[#D5E9DF] transition-colors cursor-pointer disabled:opacity-50"
                   >
                     Cancel
                   </button>
@@ -1054,7 +1054,7 @@ export default function ProfilePage({ setCurrentView }) {
                     type="button"
                     disabled={deletingAccount}
                     onClick={handleFinalPermanentlyDelete}
-                    className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 shadow-xl shadow-rose-600/40 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {deletingAccount ? (
                       <>

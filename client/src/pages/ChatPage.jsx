@@ -389,16 +389,16 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
   if (!user) {
     return (
       <div className="max-w-md mx-auto py-24 px-4 text-center space-y-4">
-        <div className="w-14 h-14 rounded-2xl bg-[#7657ff]/20 text-[#39d5f6] flex items-center justify-center mx-auto mb-2">
+        <div className="w-14 h-14 rounded-2xl bg-[#A8E6CF]/15 text-[#A8E6CF] flex items-center justify-center mx-auto mb-2">
           <MessageSquare className="w-7 h-7" />
         </div>
-        <h2 className="text-xl font-bold text-white">Sign In to Chat</h2>
-        <p className="text-xs text-slate-400">
+        <h2 className="text-xl font-bold text-[#164E41]">Sign In to Chat</h2>
+        <p className="text-xs text-[#527568]">
           Chat is available exclusively for accepted connections. Sign in to collaborate with your study partners.
         </p>
         <button
           onClick={() => openAuth('login')}
-          className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] shadow-lg shadow-[#7657ff]/25 cursor-pointer"
+          className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md shadow-[#16866A]/20 cursor-pointer"
         >
           Sign In
         </button>
@@ -408,41 +408,41 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
 
   return (
     <div className="max-w-7xl mx-auto px-2 sm:px-6 py-3 md:py-6 h-[calc(100vh-80px)] flex flex-col">
-      <div className="glass-panel rounded-3xl border border-white/15 shadow-2xl flex-1 flex overflow-hidden">
+      <div className="bg-white rounded-3xl border border-[#D5E9DF] shadow-md flex-1 flex overflow-hidden">
         {/* =================================================================== */}
         {/* LEFT PANEL — CONNECTED USERS LIST                                   */}
         {/* =================================================================== */}
         <div
-          className={`w-full md:w-80 lg:w-96 border-r border-white/10 flex flex-col shrink-0 bg-slate-950/30 ${
+          className={`w-full md:w-80 lg:w-96 border-r border-[#D5E9DF] flex flex-col shrink-0 bg-[#F1FAF5] ${
             activeConnId ? 'hidden md:flex' : 'flex'
           }`}
         >
           {/* Left Panel Header */}
-          <div className="p-4 border-b border-white/10 space-y-3">
+          <div className="p-4 border-b border-[#D5E9DF] space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-[#7657ff]/20 text-[#39d5f6]">
+                <div className="p-2 rounded-xl bg-[#E4F6EE] text-[#16866A]">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-bold text-white">Messages</h2>
-                  <p className="text-[11px] text-slate-400">Accepted Connections</p>
+                  <h2 className="text-sm font-bold text-[#164E41]">Messages</h2>
+                  <p className="text-[11px] text-[#527568]">Accepted Connections</p>
                 </div>
               </div>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#7657ff]/20 text-[#b7a4ff] font-semibold border border-[#7657ff]/30">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E4F6EE] text-[#16866A] font-semibold border border-[#D5E9DF]">
                 {connections.length} {connections.length === 1 ? 'partner' : 'partners'}
               </span>
             </div>
 
             {/* Search Input */}
             <div className="relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-[#527568] absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search connected partners..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#7657ff]"
+                className="w-full pl-9 pr-3.5 py-2 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
               />
             </div>
           </div>
@@ -450,20 +450,20 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
           {/* Connected Users List */}
           <div className="flex-1 overflow-y-auto p-2 space-y-1">
             {loadingConnections ? (
-              <div className="flex items-center justify-center py-16 text-slate-400 text-xs gap-2">
-                <Loader2 className="w-4 h-4 animate-spin text-[#39d5f6]" />
+              <div className="flex items-center justify-center py-16 text-[#527568] text-xs gap-2">
+                <Loader2 className="w-4 h-4 animate-spin text-[#16866A]" />
                 <span>Loading connections...</span>
               </div>
             ) : filteredConnections.length === 0 ? (
               <div className="text-center py-16 px-4 space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-slate-400">
+                <div className="w-12 h-12 rounded-2xl bg-white border border-[#D5E9DF] flex items-center justify-center mx-auto text-[#527568]">
                   <User className="w-6 h-6" />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-white font-semibold">
+                  <p className="text-xs text-[#164E41] font-semibold">
                     {searchQuery ? 'No matching partners' : 'No accepted connections yet'}
                   </p>
-                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                  <p className="text-[11px] text-[#527568] leading-relaxed">
                     {searchQuery
                       ? 'Try searching with another name or bridge handle.'
                       : 'Connect with other learners in Explore Skills to start chatting and sharing skills!'}
@@ -472,7 +472,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 {!searchQuery && (
                   <button
                     onClick={() => setCurrentView('explore')}
-                    className="mt-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 shadow-md shadow-[#7657ff]/20 cursor-pointer"
+                    className="mt-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-xs cursor-pointer"
                   >
                     Explore Skills
                   </button>
@@ -493,8 +493,8 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                     }}
                     className={`w-full p-3 rounded-2xl text-left flex items-start gap-3 transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-[#7657ff]/20 border border-[#7657ff]/40 shadow-sm'
-                        : 'hover:bg-white/5 border border-transparent'
+                        ? 'bg-[#E4F6EE] border border-[#16866A]/30 shadow-xs'
+                        : 'hover:bg-white/80 border border-transparent'
                     }`}
                   >
                     {/* Partner Avatar */}
@@ -502,10 +502,10 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                       <img
                         src={partner?.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(partner?.bridgeAccount || 'user')}`}
                         alt={partner?.name || 'Partner'}
-                        className="w-11 h-11 rounded-xl object-cover border border-[#7657ff]/30"
+                        className="w-11 h-11 rounded-xl object-cover border border-[#D5E9DF]"
                       />
                       {conn.isMuted && (
-                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center">
+                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white border border-[#D5E9DF] text-[#527568] flex items-center justify-center shadow-xs">
                           <BellOff className="w-2.5 h-2.5" />
                         </div>
                       )}
@@ -514,28 +514,28 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                     {/* Name, Handle, & Last Message */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-1">
-                        <span className="text-xs font-bold text-white truncate">
+                        <span className="text-xs font-bold text-[#164E41] truncate">
                           {partner?.name || 'Study Partner'}
                         </span>
                         {lastMsg && (
-                          <span className="text-[10px] text-slate-400 shrink-0">
+                          <span className="text-[10px] text-[#527568] shrink-0">
                             {new Date(lastMsg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </span>
                         )}
                       </div>
 
-                      <p className="text-[11px] text-[#39d5f6] font-mono truncate">
+                      <p className="text-[11px] text-[#16866A] font-mono truncate">
                         @{partner?.bridgeAccount || 'bridge_user'}
                       </p>
 
-                      <p className="text-xs text-slate-300 truncate mt-1">
+                      <p className="text-xs text-[#527568] truncate mt-1">
                         {lastMsg ? (
                           <span>
-                            {lastMsg.senderId === user.id && <span className="text-slate-400">You: </span>}
+                            {lastMsg.senderId === user.id && <span className="text-[#527568]/80">You: </span>}
                             {lastMsg.body}
                           </span>
                         ) : (
-                          <span className="text-slate-500 italic">No messages yet</span>
+                          <span className="text-[#527568]/60 italic">No messages yet</span>
                         )}
                       </p>
                     </div>
@@ -550,14 +550,14 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
         {/* RIGHT PANEL — CONVERSATION VIEW                                     */}
         {/* =================================================================== */}
         <div
-          className={`flex-1 flex flex-col bg-slate-950/10 min-w-0 ${
+          className={`flex-1 flex flex-col bg-white min-w-0 ${
             !activeConnId ? 'hidden md:flex' : 'flex'
           }`}
         >
           {activeConnection ? (
             <>
               {/* Header */}
-              <div className="px-4 py-3 sm:px-6 border-b border-white/10 flex items-center justify-between bg-black/30 shrink-0 relative z-30">
+              <div className="px-4 py-3 sm:px-6 border-b border-[#D5E9DF] flex items-center justify-between bg-white shrink-0 relative z-30">
                 <div className="flex items-center gap-3 min-w-0">
                   {/* Back button on mobile */}
                   <button
@@ -565,7 +565,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                       setActiveConnId(null);
                       if (setSelectedConnectionId) setSelectedConnectionId(null);
                     }}
-                    className="md:hidden p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                    className="md:hidden p-1.5 rounded-xl text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors cursor-pointer"
                     aria-label="Back to contacts"
                   >
                     <ArrowLeft className="w-5 h-5" />
@@ -574,29 +574,29 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                   <img
                     src={activeConnection.partner?.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(activeConnection.partner?.bridgeAccount || 'user')}`}
                     alt={activeConnection.partner?.name || 'Partner'}
-                    className="w-10 h-10 rounded-xl object-cover border border-[#7657ff]/40 shrink-0"
+                    className="w-10 h-10 rounded-xl object-cover border border-[#D5E9DF] shrink-0"
                   />
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-bold text-white truncate">
+                      <h3 className="text-sm font-bold text-[#164E41] truncate">
                         {activeConnection.partner?.name || 'Study Partner'}
                       </h3>
-                      <span className="hidden sm:inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      <span className="hidden sm:inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF]">
                         <ShieldCheck className="w-3 h-3" />
                         <span>Connected</span>
                       </span>
                       {activeConnection.isMuted && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200 flex items-center gap-1">
                           <BellOff className="w-3 h-3" />
                           <span>Muted</span>
                         </span>
                       )}
                     </div>
-                    <p className="text-[11px] text-slate-400 flex items-center gap-1 truncate">
-                      <GraduationCap className="w-3 h-3 text-[#39d5f6] shrink-0" />
+                    <p className="text-[11px] text-[#527568] flex items-center gap-1 truncate">
+                      <GraduationCap className="w-3 h-3 text-[#16866A] shrink-0" />
                       <span className="truncate">{activeConnection.partner?.instituteName || 'Independent Learner'}</span>
-                      <span className="font-mono text-slate-500">@{activeConnection.partner?.bridgeAccount}</span>
+                      <span className="font-mono text-[#16866A]">@{activeConnection.partner?.bridgeAccount}</span>
                     </p>
                   </div>
                 </div>
@@ -605,7 +605,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 <div className="relative shrink-0" ref={headerMenuRef}>
                   <button
                     onClick={() => setHeaderMenuOpen(prev => !prev)}
-                    className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
+                    className="p-2 rounded-xl text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] border border-[#D5E9DF] transition-colors cursor-pointer"
                     title="Chat menu options"
                     aria-label="Chat menu options"
                   >
@@ -613,23 +613,23 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                   </button>
 
                   {headerMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-56 rounded-2xl glass-panel p-1.5 shadow-2xl border border-white/20 animate-in fade-in zoom-in-95 duration-150 z-50">
+                    <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-white p-1.5 shadow-2xl border border-[#D5E9DF] animate-in fade-in zoom-in-95 duration-150 z-50">
                       {/* 1B. Mute notifications / Unmute notifications */}
                       <button
                         onClick={() => {
                           setHeaderMenuOpen(false);
                           handleToggleMute();
                         }}
-                        className="w-full px-3 py-2 text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
+                        className="w-full px-3 py-2 text-xs font-semibold text-[#164E41] hover:bg-[#F1FAF5] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
                       >
                         {activeConnection.isMuted ? (
                           <>
-                            <Bell className="w-4 h-4 text-emerald-400" />
+                            <Bell className="w-4 h-4 text-[#16866A]" />
                             <span>Unmute notifications</span>
                           </>
                         ) : (
                           <>
-                            <BellOff className="w-4 h-4 text-amber-400" />
+                            <BellOff className="w-4 h-4 text-amber-600" />
                             <span>Mute notifications</span>
                           </>
                         )}
@@ -641,9 +641,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                           setHeaderMenuOpen(false);
                           setProfileModalPartner(activeConnection.partner);
                         }}
-                        className="w-full px-3 py-2 text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
+                        className="w-full px-3 py-2 text-xs font-semibold text-[#164E41] hover:bg-[#F1FAF5] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
                       >
-                        <User className="w-4 h-4 text-[#39d5f6]" />
+                        <User className="w-4 h-4 text-[#16866A]" />
                         <span>Show profile</span>
                       </button>
 
@@ -653,13 +653,13 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                           setHeaderMenuOpen(false);
                           setClearChatModalOpen(true);
                         }}
-                        className="w-full px-3 py-2 text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
+                        className="w-full px-3 py-2 text-xs font-semibold text-[#164E41] hover:bg-[#F1FAF5] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
                       >
-                        <Trash2 className="w-4 h-4 text-amber-400" />
+                        <Trash2 className="w-4 h-4 text-amber-600" />
                         <span>Clear chat</span>
                       </button>
 
-                      <div className="border-t border-white/10 my-1" />
+                      <div className="border-t border-[#D5E9DF] my-1" />
 
                       {/* 1D. Remove connection */}
                       <button
@@ -668,9 +668,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                           setRemoveError('');
                           setRemoveModalConn(activeConnection);
                         }}
-                        className="w-full px-3 py-2 text-xs font-semibold text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
+                        className="w-full px-3 py-2 text-xs font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer text-left"
                       >
-                        <UserMinus className="w-4 h-4 text-rose-400" />
+                        <UserMinus className="w-4 h-4 text-rose-600" />
                         <span>Remove connection</span>
                       </button>
                     </div>
@@ -679,23 +679,23 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
               </div>
 
               {/* Message History Body */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3.5">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3.5 bg-[#F1FAF5]/30">
                 {loadingMessages ? (
-                  <div className="flex items-center justify-center py-24 text-slate-400 text-xs gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin text-[#39d5f6]" />
+                  <div className="flex items-center justify-center py-24 text-[#527568] text-xs gap-2">
+                    <Loader2 className="w-4 h-4 animate-spin text-[#16866A]" />
                     <span>Loading conversation history...</span>
                   </div>
                 ) : messageError ? (
-                  <div className="p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs text-center">
+                  <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs text-center">
                     {messageError}
                   </div>
                 ) : messages.length === 0 ? (
                   <div className="text-center py-24 px-4 space-y-2">
-                    <div className="w-12 h-12 rounded-2xl bg-[#7657ff]/15 text-[#39d5f6] flex items-center justify-center mx-auto mb-2">
+                    <div className="w-12 h-12 rounded-2xl bg-[#E4F6EE] text-[#16866A] border border-[#D5E9DF] flex items-center justify-center mx-auto mb-2">
                       <Sparkles className="w-6 h-6" />
                     </div>
-                    <p className="text-xs text-white font-semibold">Start your conversation!</p>
-                    <p className="text-[11px] text-slate-400 max-w-sm mx-auto">
+                    <p className="text-xs text-[#164E41] font-semibold">Start your conversation!</p>
+                    <p className="text-[11px] text-[#527568] max-w-sm mx-auto">
                       You and {activeConnection.partner?.name || 'your partner'} are connected. Say hello and coordinate your skill exchange session!
                     </p>
                   </div>
@@ -716,22 +716,26 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                         <div className={`flex items-center gap-1.5 max-w-[88%] sm:max-w-[75%] ${isOwn ? 'flex-row-reverse' : 'flex-row'}`}>
                           {/* Message Bubble Container */}
                           <div
-                            className={`px-4 py-2.5 rounded-2xl text-xs leading-relaxed break-words whitespace-pre-wrap shadow-sm transition-all ${
-                              isHighlighted ? 'ring-2 ring-[#39d5f6] ring-offset-2 ring-offset-black' : ''
+                            className={`px-4 py-2.5 rounded-2xl text-xs leading-relaxed break-words whitespace-pre-wrap shadow-xs transition-all ${
+                              isHighlighted ? 'ring-2 ring-[#16866A] ring-offset-2 ring-offset-white' : ''
                             } ${
                               isOwn
-                                ? 'bg-gradient-to-r from-[#7657ff] to-[#6366f1] text-white rounded-tr-xs'
-                                : 'bg-white/10 backdrop-blur-md border border-white/15 text-slate-100 rounded-tl-xs'
+                                ? 'bg-[#16866A] text-white font-medium rounded-tr-xs shadow-sm'
+                                : 'bg-white border border-[#D5E9DF] text-[#164E41] rounded-tl-xs shadow-xs'
                             }`}
                           >
                             {/* 1G. Quoted Replied-to Message Snippet inside Bubble */}
                             {msg.replyTo && (
                               <div
                                 onClick={() => scrollToMessage(msg.replyToId)}
-                                className="mb-2 p-2 rounded-xl bg-black/25 border-l-2 border-[#39d5f6] text-[11px] cursor-pointer hover:bg-black/35 transition-colors select-none"
+                                className={`mb-2 p-2 rounded-xl border-l-2 text-[11px] cursor-pointer transition-colors select-none ${
+                                  isOwn
+                                    ? 'bg-white/20 border-white text-white'
+                                    : 'bg-[#F1FAF5] border-[#16866A] text-[#164E41]'
+                                }`}
                                 title="Click to view original message"
                               >
-                                <p className="font-bold text-[#39d5f6] text-[10px] flex items-center gap-1">
+                                <p className={`font-bold text-[10px] flex items-center gap-1 ${isOwn ? 'text-white' : 'text-[#16866A]'}`}>
                                   <CornerUpLeft className="w-2.5 h-2.5" />
                                   <span>
                                     {msg.replyTo.senderId === user.id
@@ -739,7 +743,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                       : (msg.replyTo.senderName || activeConnection.partner?.name || 'Partner')}
                                   </span>
                                 </p>
-                                <p className="truncate italic mt-0.5 text-slate-300 opacity-90 max-w-xs">
+                                <p className={`truncate italic mt-0.5 opacity-90 max-w-xs ${isOwn ? 'text-white/90' : 'text-[#527568]'}`}>
                                   {msg.replyTo.messageBody}
                                 </p>
                               </div>
@@ -751,7 +755,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                 <textarea
                                   value={editingText}
                                   onChange={(e) => setEditingText(e.target.value)}
-                                  className="w-full p-2.5 rounded-xl bg-black/40 border border-[#39d5f6] text-white text-xs resize-none focus:outline-none"
+                                  className="w-full p-2.5 rounded-xl bg-white border border-[#16866A] text-[#164E41] text-xs resize-none focus:outline-none"
                                   rows={2}
                                   autoFocus
                                   onKeyDown={(e) => {
@@ -767,7 +771,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                   <button
                                     type="button"
                                     onClick={() => setEditingMessageId(null)}
-                                    className="px-2.5 py-1 text-[11px] text-slate-300 hover:text-white bg-white/10 rounded-lg cursor-pointer transition-colors"
+                                    className="px-2.5 py-1 text-[11px] text-[#527568] hover:text-[#164E41] bg-[#F1FAF5] border border-[#D5E9DF] rounded-lg cursor-pointer transition-colors"
                                   >
                                     Cancel
                                   </button>
@@ -775,7 +779,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                     type="button"
                                     onClick={() => handleSaveEdit(msg.id)}
                                     disabled={!editingText.trim()}
-                                    className="px-2.5 py-1 text-[11px] font-bold text-white bg-gradient-to-r from-[#7657ff] to-[#39d5f6] rounded-lg shadow-sm cursor-pointer disabled:opacity-50"
+                                    className="px-2.5 py-1 text-[11px] font-bold text-white bg-[#16866A] hover:bg-[#0F7058] rounded-lg shadow-xs cursor-pointer disabled:opacity-50"
                                   >
                                     Save
                                   </button>
@@ -800,7 +804,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                   e.stopPropagation();
                                   setReplyingTo(msg);
                                 }}
-                                className="p-2 sm:p-1.5 rounded-xl text-slate-300 sm:text-slate-400 hover:text-white hover:bg-white/10 active:bg-white/20 transition-colors cursor-pointer touch-manipulation"
+                                className="p-2 sm:p-1.5 rounded-xl text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] active:bg-[#E4F6EE] transition-colors cursor-pointer touch-manipulation"
                                 title="Reply to message"
                                 aria-label="Reply to message"
                               >
@@ -817,8 +821,8 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                   }}
                                   className={`p-2 sm:p-1.5 rounded-xl transition-colors cursor-pointer touch-manipulation ${
                                     activeMsgMenuId === msg.id
-                                      ? 'text-[#39d5f6] bg-white/15'
-                                      : 'text-slate-300 sm:text-slate-400 hover:text-white hover:bg-white/10 active:bg-white/20'
+                                      ? 'text-[#16866A] bg-[#E4F6EE]'
+                                      : 'text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] active:bg-[#E4F6EE]'
                                   }`}
                                   title="More message actions"
                                   aria-label="More message actions"
@@ -830,19 +834,19 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                   <>
                                     {/* Mobile Action Sheet (Fixed overlay, always inside screen, never clipped) */}
                                     <div
-                                      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex flex-col justify-end p-4 animate-in fade-in duration-150 sm:hidden"
+                                      className="fixed inset-0 z-50 bg-[#164E41]/40 backdrop-blur-xs flex flex-col justify-end p-4 animate-in fade-in duration-150 sm:hidden"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         setActiveMsgMenuId(null);
                                       }}
                                     >
                                       <div
-                                        className="w-full max-w-sm mx-auto glass-panel rounded-2xl p-2.5 shadow-2xl border border-white/20 space-y-1 animate-in slide-in-from-bottom-4 duration-200"
+                                        className="w-full max-w-sm mx-auto bg-white rounded-2xl p-2.5 shadow-2xl border border-[#D5E9DF] space-y-1 animate-in slide-in-from-bottom-4 duration-200"
                                         onClick={(e) => e.stopPropagation()}
                                       >
-                                        <div className="px-3 py-2 border-b border-white/10 flex items-center justify-between">
-                                          <span className="text-xs font-bold text-white">Message Actions</span>
-                                          <span className="text-[10px] text-slate-400">
+                                        <div className="px-3 py-2 border-b border-[#D5E9DF] flex items-center justify-between">
+                                          <span className="text-xs font-bold text-[#164E41]">Message Actions</span>
+                                          <span className="text-[10px] text-[#527568]">
                                             {isOwn ? 'Your message' : (activeConnection.partner?.name || 'Partner')}
                                           </span>
                                         </div>
@@ -854,9 +858,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                             setActiveMsgMenuId(null);
                                             setReplyingTo(msg);
                                           }}
-                                          className="w-full px-3 py-2.5 text-xs font-semibold text-slate-200 hover:text-white active:bg-white/15 rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
+                                          className="w-full px-3 py-2.5 text-xs font-semibold text-[#164E41] hover:bg-[#F1FAF5] active:bg-[#E4F6EE] rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
                                         >
-                                          <CornerUpLeft className="w-4 h-4 text-[#39d5f6]" />
+                                          <CornerUpLeft className="w-4 h-4 text-[#16866A]" />
                                           <span>Reply</span>
                                         </button>
 
@@ -870,9 +874,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                                 setEditingMessageId(msg.id);
                                                 setEditingText(msg.messageBody);
                                               }}
-                                              className="w-full px-3 py-2.5 text-xs font-semibold text-slate-200 hover:text-white active:bg-white/15 rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
+                                              className="w-full px-3 py-2.5 text-xs font-semibold text-[#164E41] hover:bg-[#F1FAF5] active:bg-[#E4F6EE] rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
                                             >
-                                              <Edit3 className="w-4 h-4 text-amber-400" />
+                                              <Edit3 className="w-4 h-4 text-amber-600" />
                                               <span>Edit</span>
                                             </button>
 
@@ -883,7 +887,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                                 setActiveMsgMenuId(null);
                                                 setUnsendModalMessage(msg);
                                               }}
-                                              className="w-full px-3 py-2.5 text-xs font-semibold text-rose-400 hover:text-rose-300 active:bg-rose-500/20 rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
+                                              className="w-full px-3 py-2.5 text-xs font-semibold text-rose-600 hover:text-rose-700 active:bg-rose-50 rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
                                             >
                                               <Undo2 className="w-4 h-4" />
                                               <span>Unsend</span>
@@ -893,9 +897,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                             <button
                                               type="button"
                                               onClick={() => handleDeleteForMe(msg.id)}
-                                              className="w-full px-3 py-2.5 text-xs font-semibold text-slate-300 hover:text-white active:bg-white/15 rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
+                                              className="w-full px-3 py-2.5 text-xs font-semibold text-[#527568] hover:text-[#164E41] active:bg-[#F1FAF5] rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
                                             >
-                                              <Trash2 className="w-4 h-4 text-slate-400" />
+                                              <Trash2 className="w-4 h-4 text-[#527568]" />
                                               <span>Delete from me</span>
                                             </button>
                                           </>
@@ -904,19 +908,19 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                           <button
                                             type="button"
                                             onClick={() => handleDeleteForMe(msg.id)}
-                                            className="w-full px-3 py-2.5 text-xs font-semibold text-slate-300 hover:text-white active:bg-white/15 rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
+                                            className="w-full px-3 py-2.5 text-xs font-semibold text-[#527568] hover:text-[#164E41] active:bg-[#F1FAF5] rounded-xl flex items-center gap-3 transition-colors cursor-pointer text-left"
                                           >
-                                            <Trash2 className="w-4 h-4 text-slate-400" />
+                                            <Trash2 className="w-4 h-4 text-[#527568]" />
                                             <span>Delete from me</span>
                                           </button>
                                         )}
 
                                         {/* Cancel button on mobile */}
-                                        <div className="pt-1 border-t border-white/10">
+                                        <div className="pt-1 border-t border-[#D5E9DF]">
                                           <button
                                             type="button"
                                             onClick={() => setActiveMsgMenuId(null)}
-                                            className="w-full py-2 text-xs font-medium text-slate-400 hover:text-white active:bg-white/10 rounded-xl text-center transition-colors"
+                                            className="w-full py-2 text-xs font-medium text-[#527568] hover:text-[#164E41] active:bg-[#F1FAF5] rounded-xl text-center transition-colors"
                                           >
                                             Cancel
                                           </button>
@@ -925,7 +929,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                     </div>
 
                                     {/* Desktop Dropdown Menu (Positioned relative to 3-dot button) */}
-                                    <div className={`hidden sm:block absolute ${isOwn ? 'right-0' : 'left-0'} mt-1 w-44 rounded-2xl glass-panel p-1.5 shadow-2xl border border-white/20 animate-in fade-in zoom-in-95 duration-100 z-40`}>
+                                    <div className={`hidden sm:block absolute ${isOwn ? 'right-0' : 'left-0'} mt-1 w-44 rounded-2xl bg-white p-1.5 shadow-2xl border border-[#D5E9DF] animate-in fade-in zoom-in-95 duration-100 z-40`}>
                                       {/* 1G. Reply */}
                                       <button
                                         type="button"
@@ -933,13 +937,12 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                           setActiveMsgMenuId(null);
                                           setReplyingTo(msg);
                                         }}
-                                        className="w-full px-2.5 py-1.5 text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
+                                        className="w-full px-2.5 py-1.5 text-xs font-semibold text-[#164E41] hover:bg-[#F1FAF5] rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
                                       >
-                                        <CornerUpLeft className="w-3.5 h-3.5 text-[#39d5f6]" />
+                                        <CornerUpLeft className="w-3.5 h-3.5 text-[#16866A]" />
                                         <span>Reply</span>
                                       </button>
 
-                                      {/* Sent by current user options */}
                                       {isOwn ? (
                                         <>
                                           {/* 1H. Edit */}
@@ -950,9 +953,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                               setEditingMessageId(msg.id);
                                               setEditingText(msg.messageBody);
                                             }}
-                                            className="w-full px-2.5 py-1.5 text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
+                                            className="w-full px-2.5 py-1.5 text-xs font-semibold text-[#164E41] hover:bg-[#F1FAF5] rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
                                           >
-                                            <Edit3 className="w-3.5 h-3.5 text-amber-400" />
+                                            <Edit3 className="w-3.5 h-3.5 text-amber-600" />
                                             <span>Edit</span>
                                           </button>
 
@@ -963,7 +966,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                               setActiveMsgMenuId(null);
                                               setUnsendModalMessage(msg);
                                             }}
-                                            className="w-full px-2.5 py-1.5 text-xs font-semibold text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
+                                            className="w-full px-2.5 py-1.5 text-xs font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
                                           >
                                             <Undo2 className="w-3.5 h-3.5" />
                                             <span>Unsend</span>
@@ -973,9 +976,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                           <button
                                             type="button"
                                             onClick={() => handleDeleteForMe(msg.id)}
-                                            className="w-full px-2.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
+                                            className="w-full px-2.5 py-1.5 text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
                                           >
-                                            <Trash2 className="w-3.5 h-3.5 text-slate-400" />
+                                            <Trash2 className="w-3.5 h-3.5 text-[#527568]" />
                                             <span>Delete from me</span>
                                           </button>
                                         </>
@@ -984,9 +987,9 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                                         <button
                                           type="button"
                                           onClick={() => handleDeleteForMe(msg.id)}
-                                          className="w-full px-2.5 py-1.5 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
+                                          className="w-full px-2.5 py-1.5 text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] rounded-xl flex items-center gap-2 transition-colors cursor-pointer text-left"
                                         >
-                                          <Trash2 className="w-3.5 h-3.5 text-slate-400" />
+                                          <Trash2 className="w-3.5 h-3.5 text-[#527568]" />
                                           <span>Delete from me</span>
                                         </button>
                                       )}
@@ -1016,14 +1019,14 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
 
               {/* 1G. Reply Preview Above Input */}
               {replyingTo && (
-                <div className="px-4 py-2.5 bg-slate-900/90 border-t border-white/10 flex items-center justify-between gap-3 text-xs shrink-0 animate-in fade-in slide-in-from-bottom-2 duration-150">
+                <div className="px-4 py-2.5 bg-[#E4F6EE] border-t border-[#D5E9DF] flex items-center justify-between gap-3 text-xs shrink-0 animate-in fade-in slide-in-from-bottom-2 duration-150">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <CornerUpLeft className="w-4 h-4 text-[#39d5f6] shrink-0" />
+                    <CornerUpLeft className="w-4 h-4 text-[#16866A] shrink-0" />
                     <div className="min-w-0">
-                      <span className="font-bold text-[#39d5f6] text-[11px]">
+                      <span className="font-bold text-[#16866A] text-[11px]">
                         Replying to {replyingTo.senderId === user.id ? 'yourself' : (activeConnection.partner?.name || 'Partner')}
                       </span>
-                      <p className="text-[11px] text-slate-300 truncate max-w-sm sm:max-w-md">
+                      <p className="text-[11px] text-[#527568] truncate max-w-sm sm:max-w-md">
                         {replyingTo.messageBody}
                       </p>
                     </div>
@@ -1031,7 +1034,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                   <button
                     type="button"
                     onClick={() => setReplyingTo(null)}
-                    className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 shrink-0 cursor-pointer"
+                    className="p-1 rounded-lg text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] shrink-0 cursor-pointer"
                     title="Cancel reply"
                     aria-label="Cancel reply"
                   >
@@ -1043,7 +1046,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
               {/* Message Input Footer */}
               <form
                 onSubmit={handleSendMessage}
-                className="p-3 sm:p-4 border-t border-white/10 bg-black/20 flex items-center gap-2 shrink-0"
+                className="p-3 sm:p-4 border-t border-[#D5E9DF] bg-white flex items-center gap-2 shrink-0"
               >
                 <textarea
                   rows="1"
@@ -1056,29 +1059,29 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                       handleSendMessage();
                     }
                   }}
-                  className="flex-1 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-[#7657ff] resize-none max-h-32"
+                  className="flex-1 px-4 py-2.5 rounded-2xl bg-[#F1FAF5] border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:bg-white focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A] resize-none max-h-32"
                 />
                 <button
                   type="submit"
                   disabled={!messageText.trim() || sendingMessage}
-                  className="w-10 h-10 rounded-2xl bg-gradient-to-r from-[#7657ff] to-[#39d5f6] hover:opacity-95 text-white flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 shadow-lg shadow-[#7657ff]/20 cursor-pointer"
+                  className="w-10 h-10 rounded-2xl bg-[#16866A] hover:bg-[#0F7058] text-white flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0 shadow-md shadow-[#16866A]/20 cursor-pointer"
                   aria-label="Send message"
                 >
                   {sendingMessage ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin text-white" />
                   ) : (
-                    <Send className="w-4 h-4" />
+                    <Send className="w-4 h-4 text-white" />
                   )}
                 </button>
               </form>
             </>
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center p-8 text-center space-y-3">
-              <div className="w-16 h-16 rounded-3xl bg-[#7657ff]/15 border border-[#7657ff]/30 text-[#39d5f6] flex items-center justify-center mb-1">
+              <div className="w-16 h-16 rounded-3xl bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A] flex items-center justify-center mb-1">
                 <MessageSquare className="w-8 h-8" />
               </div>
-              <h3 className="text-base font-bold text-white">Select a Conversation</h3>
-              <p className="text-xs text-slate-400 max-w-sm">
+              <h3 className="text-base font-bold text-[#164E41]">Select a Conversation</h3>
+              <p className="text-xs text-[#527568] max-w-sm">
                 Choose a connected partner from the left panel to view message history and send messages.
               </p>
             </div>
@@ -1090,34 +1093,34 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
       {/* 1C. SHOW PROFILE MODAL                                              */}
       {/* =================================================================== */}
       {profileModalPartner && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md glass-panel rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/20 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#164E41]/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-7 shadow-2xl border border-[#D5E9DF] max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setProfileModalPartner(null)}
-              className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-2 rounded-full text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors cursor-pointer"
               aria-label="Close Profile"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Profile Avatar & Names */}
-            <div className="text-center pb-5 border-b border-white/10 mb-5">
+            <div className="text-center pb-5 border-b border-[#D5E9DF] mb-5">
               <img
                 src={profileModalPartner.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(profileModalPartner.bridgeAccount || 'user')}`}
                 alt={profileModalPartner.name}
-                className="w-20 h-20 rounded-3xl object-cover border-2 border-[#7657ff]/50 shadow-xl mx-auto mb-3"
+                className="w-20 h-20 rounded-3xl object-cover border-2 border-[#16866A]/30 shadow-md mx-auto mb-3"
               />
-              <h3 className="text-lg font-bold text-white">{profileModalPartner.name}</h3>
-              <p className="text-xs text-[#39d5f6] font-mono mt-0.5">@{profileModalPartner.bridgeAccount}</p>
-              <p className="text-xs text-slate-400 mt-1 flex items-center justify-center gap-1.5">
-                <GraduationCap className="w-3.5 h-3.5 text-slate-400" />
+              <h3 className="text-lg font-bold text-[#164E41]">{profileModalPartner.name}</h3>
+              <p className="text-xs text-[#16866A] font-mono mt-0.5">@{profileModalPartner.bridgeAccount}</p>
+              <p className="text-xs text-[#527568] mt-1 flex items-center justify-center gap-1.5">
+                <GraduationCap className="w-3.5 h-3.5 text-[#527568]" />
                 <span>{profileModalPartner.instituteName || 'Independent Learner'}</span>
               </p>
             </div>
 
             {/* Skills Taught */}
             <div className="space-y-2 mb-4">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#39d5f6] uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#16866A] uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Skills Offered (Can Teach)</span>
               </div>
@@ -1126,20 +1129,20 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                   profileModalPartner.skillsTeach.map((skill, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-xl text-xs font-semibold bg-[#39d5f6]/15 border border-[#39d5f6]/30 text-[#39d5f6]"
+                      className="px-2.5 py-1 rounded-xl text-xs font-semibold bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A]"
                     >
                       {typeof skill === 'string' ? skill : skill.name}
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-slate-500 italic">No skills listed</span>
+                  <span className="text-xs text-[#527568]/60 italic">No skills listed</span>
                 )}
               </div>
             </div>
 
             {/* Skills Wanted to Learn */}
             <div className="space-y-2 mb-6">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#b7a4ff] uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#164E41] uppercase tracking-wider">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Skills Wanted (Wants to Learn)</span>
               </div>
@@ -1148,20 +1151,20 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                   profileModalPartner.skillsLearn.map((skill, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-xl text-xs font-semibold bg-[#7657ff]/20 border border-[#7657ff]/35 text-[#b7a4ff]"
+                      className="px-2.5 py-1 rounded-xl text-xs font-semibold bg-[#F1FAF5] border border-[#D5E9DF] text-[#164E41]"
                     >
                       {typeof skill === 'string' ? skill : skill.name}
                     </span>
                   ))
                 ) : (
-                  <span className="text-xs text-slate-500 italic">No skills listed</span>
+                  <span className="text-xs text-[#527568]/60 italic">No skills listed</span>
                 )}
               </div>
             </div>
 
             <button
               onClick={() => setProfileModalPartner(null)}
-              className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-white/10 hover:bg-white/15 transition-colors cursor-pointer"
+              className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] shadow-md transition-colors cursor-pointer"
             >
               Close
             </button>
@@ -1173,8 +1176,8 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
       {/* 1D. REMOVE CONNECTION CONFIRMATION MODAL                            */}
       {/* =================================================================== */}
       {removeModalConn && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md glass-panel rounded-3xl p-6 shadow-2xl border border-rose-500/30">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#164E41]/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-rose-200">
             <button
               onClick={() => {
                 if (!removingConnection) {
@@ -1183,30 +1186,30 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 }
               }}
               disabled={removingConnection}
-              className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-2 rounded-full text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors cursor-pointer"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 border border-rose-200 flex items-center justify-center shrink-0">
                 <AlertTriangle className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Remove Connection</h3>
-                <p className="text-xs text-rose-300">
+                <h3 className="text-base font-bold text-[#164E41]">Remove Connection</h3>
+                <p className="text-xs text-rose-600">
                   {removeModalConn.partner?.name || 'This user'}
                 </p>
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed mb-4">
+            <p className="text-xs text-[#527568] leading-relaxed mb-4">
               Are you sure you want to remove this connection? The chat between you and this user will be closed immediately.
             </p>
 
             {removeError && (
-              <div className="p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs mb-4">
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs mb-4">
                 {removeError}
               </div>
             )}
@@ -1219,7 +1222,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                   setRemoveError('');
                 }}
                 disabled={removingConnection}
-                className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] border border-[#D5E9DF] transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -1228,10 +1231,10 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 type="button"
                 onClick={handleConfirmRemove}
                 disabled={removingConnection}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 shadow-lg shadow-rose-600/30 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {removingConnection ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin text-white" />
                 ) : (
                   <UserMinus className="w-3.5 h-3.5" />
                 )}
@@ -1246,32 +1249,32 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
       {/* 1E. CLEAR CHAT CONFIRMATION MODAL                                   */}
       {/* =================================================================== */}
       {clearChatModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md glass-panel rounded-3xl p-6 shadow-2xl border border-amber-500/30">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#164E41]/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-amber-200">
             <button
               onClick={() => {
                 if (!clearingChat) setClearChatModalOpen(false);
               }}
               disabled={clearingChat}
-              className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-2 rounded-full text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors cursor-pointer"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 border border-amber-200 flex items-center justify-center shrink-0">
                 <Trash2 className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Clear Chat</h3>
-                <p className="text-xs text-amber-300">
+                <h3 className="text-base font-bold text-[#164E41]">Clear Chat</h3>
+                <p className="text-xs text-amber-700">
                   {activeConnection?.partner?.name || 'This conversation'}
                 </p>
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed mb-4">
+            <p className="text-xs text-[#527568] leading-relaxed mb-4">
               Are you sure you want to clear this chat? This will remove all messages from your view only. Your connected partner will still keep their copy of the conversation.
             </p>
 
@@ -1280,7 +1283,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 type="button"
                 onClick={() => setClearChatModalOpen(false)}
                 disabled={clearingChat}
-                className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] border border-[#D5E9DF] transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -1289,10 +1292,10 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 type="button"
                 onClick={handleConfirmClearChat}
                 disabled={clearingChat}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-500 shadow-lg shadow-amber-600/30 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-amber-600 hover:bg-amber-700 shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {clearingChat ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin text-white" />
                 ) : (
                   <Trash2 className="w-3.5 h-3.5" />
                 )}
@@ -1307,34 +1310,34 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
       {/* 1I. UNSEND MESSAGE CONFIRMATION MODAL                               */}
       {/* =================================================================== */}
       {unsendModalMessage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md glass-panel rounded-3xl p-6 shadow-2xl border border-rose-500/30">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#164E41]/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-white rounded-3xl p-6 shadow-2xl border border-rose-200">
             <button
               onClick={() => {
                 if (!unsending) setUnsendModalMessage(null);
               }}
               disabled={unsending}
-              className="absolute top-5 right-5 p-2 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-2 rounded-full text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors cursor-pointer"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 border border-rose-500/30 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 border border-rose-200 flex items-center justify-center shrink-0">
                 <Undo2 className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Unsend Message</h3>
-                <p className="text-xs text-rose-300">Remove for everyone</p>
+                <h3 className="text-base font-bold text-[#164E41]">Unsend Message</h3>
+                <p className="text-xs text-rose-600">Remove for everyone</p>
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed mb-2">
+            <p className="text-xs text-[#527568] leading-relaxed mb-2">
               Are you sure you want to unsend this message? It will be permanently removed for both participants in this chat.
             </p>
 
-            <div className="p-3 rounded-xl bg-black/30 border border-white/10 text-xs text-slate-300 italic mb-4 max-h-24 overflow-y-auto">
+            <div className="p-3 rounded-xl bg-[#F1FAF5] border border-[#D5E9DF] text-xs text-[#164E41] italic mb-4 max-h-24 overflow-y-auto">
               "{unsendModalMessage.messageBody}"
             </div>
 
@@ -1343,7 +1346,7 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 type="button"
                 onClick={() => setUnsendModalMessage(null)}
                 disabled={unsending}
-                className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-xl text-xs font-semibold text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] border border-[#D5E9DF] transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -1352,10 +1355,10 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
                 type="button"
                 onClick={handleConfirmUnsend}
                 disabled={unsending}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 shadow-lg shadow-rose-600/30 transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {unsending ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin text-white" />
                 ) : (
                   <Undo2 className="w-3.5 h-3.5" />
                 )}

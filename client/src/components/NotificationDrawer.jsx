@@ -83,17 +83,17 @@ export default function NotificationDrawer({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-md h-full glass-panel border-l border-white/20 p-6 shadow-2xl flex flex-col justify-between overflow-hidden">
+    <div className="fixed inset-0 z-50 flex justify-end bg-[#164E41]/40 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="w-full max-w-md h-full bg-white border-l border-[#D5E9DF] p-6 shadow-2xl flex flex-col justify-between overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-white/10 shrink-0">
+        <div className="flex items-center justify-between pb-4 border-b border-[#D5E9DF] shrink-0">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-[#7657ff]/20 text-[#39d5f6]">
+            <div className="p-2 rounded-xl bg-[#E4F6EE] text-[#16866A]">
               <Bell className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">Notifications</h2>
-              <p className="text-[11px] text-slate-400">Connection requests and platform alerts</p>
+              <h2 className="text-base font-bold text-[#164E41]">Notifications</h2>
+              <p className="text-[11px] text-[#527568]">Connection requests and platform alerts</p>
             </div>
           </div>
 
@@ -101,14 +101,14 @@ export default function NotificationDrawer({
             {notifications.some(n => !n.read) && (
               <button
                 onClick={handleMarkAllRead}
-                className="text-[11px] font-semibold text-[#39d5f6] hover:underline"
+                className="text-[11px] font-semibold text-[#16866A] hover:underline cursor-pointer"
               >
                 Mark all read
               </button>
             )}
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1.5 rounded-xl text-[#527568] hover:text-[#164E41] hover:bg-[#F1FAF5] transition-colors cursor-pointer"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -120,11 +120,11 @@ export default function NotificationDrawer({
         <div className="flex-1 overflow-y-auto py-4 space-y-3">
           {notifications.length === 0 ? (
             <div className="text-center py-16 space-y-2">
-              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-slate-400">
+              <div className="w-12 h-12 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] flex items-center justify-center mx-auto text-[#527568]">
                 <Bell className="w-6 h-6" />
               </div>
-              <p className="text-xs text-white font-medium">No notifications yet</p>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-xs text-[#164E41] font-semibold">No notifications yet</p>
+              <p className="text-[11px] text-[#527568]">
                 When other learners connect with you, their requests will appear here.
               </p>
             </div>
@@ -142,8 +142,8 @@ export default function NotificationDrawer({
                   onClick={() => handleNotificationClick(notif)}
                   className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                     notif.read
-                      ? 'bg-white/5 border-white/10 text-slate-300'
-                      : 'bg-[#7657ff]/10 border-[#7657ff]/30 text-white shadow-sm'
+                      ? 'bg-[#F1FAF5] border-[#D5E9DF] text-[#164E41]'
+                      : 'bg-[#E4F6EE] border-[#A8E6CF] text-[#164E41] shadow-xs'
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -151,10 +151,10 @@ export default function NotificationDrawer({
                       <img
                         src={notif.sender.avatar}
                         alt={notif.sender.name}
-                        className="w-10 h-10 rounded-xl object-cover border border-[#7657ff]/30 shrink-0"
+                        className="w-10 h-10 rounded-xl object-cover border border-[#D5E9DF] shrink-0"
                       />
                     ) : (
-                      <div className="w-10 h-10 rounded-xl bg-[#7657ff]/20 text-[#39d5f6] flex items-center justify-center shrink-0">
+                      <div className="w-10 h-10 rounded-xl bg-[#E4F6EE] text-[#16866A] flex items-center justify-center shrink-0">
                         <Bell className="w-5 h-5" />
                       </div>
                     )}
@@ -165,28 +165,28 @@ export default function NotificationDrawer({
                       </p>
 
                       {notif.sender && (
-                        <p className="text-[11px] text-slate-400 mt-0.5 truncate">
+                        <p className="text-[11px] text-[#527568] mt-0.5 truncate">
                           {notif.sender.instituteName} • @{notif.sender.bridgeAccount}
                         </p>
                       )}
 
-                      <span className="text-[10px] text-slate-500 mt-1 block">
+                      <span className="text-[10px] text-[#527568] mt-1 block">
                         {new Date(notif.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
 
                       {/* Actions for Pending Connection Request */}
                       {isPendingRequest && (
-                        <div className="flex items-center gap-2 mt-3 pt-2 border-t border-white/10">
+                        <div className="flex items-center gap-2 mt-3 pt-2 border-t border-[#D5E9DF]">
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAccept(notif);
                             }}
                             disabled={isProcessing}
-                            className="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
+                            className="flex-1 py-1.5 px-3 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50 cursor-pointer shadow-xs"
                           >
                             {isProcessing ? (
-                              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                              <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
                             ) : (
                               <Check className="w-3.5 h-3.5" />
                             )}
@@ -199,7 +199,7 @@ export default function NotificationDrawer({
                               handleReject(notif);
                             }}
                             disabled={isProcessing}
-                            className="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold text-slate-300 hover:text-white bg-white/10 hover:bg-white/15 border border-white/10 flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
+                            className="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold text-rose-600 hover:text-rose-700 bg-white hover:bg-rose-50 border border-rose-200 flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50 cursor-pointer"
                           >
                             <span>Decline</span>
                           </button>
@@ -221,7 +221,7 @@ export default function NotificationDrawer({
                               if (onRefresh) onRefresh();
                               if (onOpenChat) onOpenChat(notif.relatedConnectionId);
                             }}
-                            className="py-1.5 px-3 rounded-xl text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 flex items-center gap-1.5 transition-colors"
+                            className="py-1.5 px-3 rounded-xl text-xs font-bold text-white bg-[#16866A] hover:bg-[#0F7058] flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
                           >
                             <MessageSquare className="w-3.5 h-3.5" />
                             <span>Open Chat</span>
@@ -237,8 +237,8 @@ export default function NotificationDrawer({
         </div>
 
         {/* Footer */}
-        <div className="pt-3 border-t border-white/10 text-center shrink-0">
-          <p className="text-[11px] text-slate-400">
+        <div className="pt-3 border-t border-[#D5E9DF] text-center shrink-0">
+          <p className="text-[11px] text-[#527568]">
             SkillBridge Secure In-App Messaging
           </p>
         </div>
