@@ -111,7 +111,7 @@ export default function ExploreSkillsPage({ onOpenChat }) {
       {loading ? (
         <div className="py-24 text-center space-y-3">
           <div className="w-10 h-10 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs text-[#527568]">Loading completed learner profiles...</p>
+          <p className="text-xs text-[#527568]">Loading learner profiles...</p>
         </div>
       ) : users.length === 0 ? (
         <div className="bg-white rounded-3xl p-12 text-center max-w-lg mx-auto border border-[#D5E9DF] shadow-xs space-y-4">
@@ -122,7 +122,7 @@ export default function ExploreSkillsPage({ onOpenChat }) {
           <p className="text-xs text-[#527568] leading-relaxed">
             {searchQuery
               ? `No registered learners matched the skill query "${searchQuery}". Try a different skill name or clear the search.`
-              : 'There are no other learners with completed profiles yet. Register a second account to test skill exchanges, or invite fellow learners!'}
+              : 'There are no other registered learners yet. Invite fellow learners to join SkillBridge!'}
           </p>
           {searchQuery && (
             <button
@@ -148,9 +148,13 @@ export default function ExploreSkillsPage({ onOpenChat }) {
                 {/* 1. Profile Picture & 2. Full Name & 3. Institute Name */}
                 <div className="flex items-start gap-4">
                   <img
-                    src={targetUser.avatar}
+                    src={targetUser.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${targetUser.bridgeAccount || targetUser.username || targetUser.name || 'user'}`}
                     alt={targetUser.name}
                     className="w-16 h-16 rounded-2xl object-cover border-2 border-[#D5E9DF] shadow-xs shrink-0"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${targetUser.bridgeAccount || targetUser.username || 'user'}`;
+                    }}
                   />
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base font-bold text-[#164E41] truncate group-hover:text-[#16866A] transition-colors">

@@ -515,7 +515,9 @@ export const dbService = {
   // EXPLORE USERS & PROFILES
   // --------------------------------------------------------------------------
   async getExploreUsers(currentUserId = null, searchQuery = '') {
-    let users = null;
+    const usersMap = new Map();
+
+    // 1. Attempt database RPC get_explore_users
     try {
       const { data: rpcData, error: rpcError } = await supabase.rpc('get_explore_users', {
         p_current_user_id: currentUserId || null,
@@ -523,61 +525,128 @@ export const dbService = {
       });
 
       if (!rpcError && Array.isArray(rpcData)) {
-        users = rpcData;
+        for (const u of rpcData) {
+          if (u && u.id && !localDeletedUsers.has(u.id)) {
+            usersMap.set(u.id, {
+              id: u.id,
+              name: u.name || u.full_name || 'Learner',
+              instituteName: u.instituteName || u.institute_name || 'Independent Learner',
+              bridgeAccount: u.bridgeAccount || u.bridge_account,
+              username: u.username || u.bridgeAccount || u.bridge_account,
+              avatar: u.avatar || u.avatar_url || `https://api.dicebear.com/7.x/bottts/svg?seed=${u.bridgeAccount || u.id}`,
+              skillsTeach: Array.isArray(u.skillsTeach) ? u.skillsTeach : [],
+              skillsLearn: Array.isArray(u.skillsLearn) ? u.skillsLearn : [],
+              connectionStatus: u.connectionStatus || 'none',
+              connectionId: u.connectionId || null,
+              isRequester: Boolean(u.isRequester)
+            });
+          }
+        }
       }
     } catch (e) {
       // ignore
     }
 
-    // Direct fallback if RPC was not used
-    if (!users) {
-      let query = supabase
-        .from('profiles')
-        .select(`
-          id,
-          full_name,
-          institute_name,
-          bridge_account,
-          avatar_url,
-          profile_completed,
-          user_skills (
-            skill_name,
-            skill_type
-          )
-        `);
-
-      if (currentUserId) {
-        query = query.neq('id', currentUserId);
+    // 2. Discover all registered user profiles across database sources
+    // Guarantees that all registered users (including newly registered users whose profile_completed
+    // flag is false/null, or where RLS restricts direct anon select) are reliably surfaced.
+    const candidateIds = new Set();
+    try {
+      const { data: credRows } = await supabase.from('user_credentials').select('user_id');
+      for (const r of (credRows || [])) {
+        if (r.user_id && !localDeletedUsers.has(r.user_id) && r.user_id !== currentUserId) {
+          candidateIds.add(r.user_id);
+        }
       }
+    } catch (e) {}
 
-      const { data, error } = await query;
-      if (error) throw error;
+    try {
+      let query = supabase.from('profiles').select(`
+        id,
+        full_name,
+        institute_name,
+        bridge_account,
+        avatar_url,
+        profile_completed,
+        user_skills (
+          skill_name,
+          skill_type
+        )
+      `);
+      if (currentUserId) query = query.neq('id', currentUserId);
+      const { data: directProfiles } = await query;
+      for (const p of (directProfiles || [])) {
+        if (p.id && !localDeletedUsers.has(p.id) && p.id !== currentUserId) {
+          candidateIds.add(p.id);
+          if (!usersMap.has(p.id)) {
+            const skills = p.user_skills || [];
+            usersMap.set(p.id, {
+              id: p.id,
+              name: p.full_name || 'Learner',
+              instituteName: p.institute_name || 'Independent Learner',
+              bridgeAccount: p.bridge_account,
+              username: p.bridge_account,
+              avatar: p.avatar_url || `https://api.dicebear.com/7.x/bottts/svg?seed=${p.bridge_account || p.id}`,
+              skillsTeach: skills.filter(s => s.skill_type === 'teach').map(s => s.skill_name),
+              skillsLearn: skills.filter(s => s.skill_type === 'learn').map(s => s.skill_name),
+              connectionStatus: 'none',
+              connectionId: null,
+              isRequester: false
+            });
+          }
+        }
+      }
+    } catch (e) {}
 
-      users = (data || []).map(u => {
-        const skills = u.user_skills || [];
-        return {
-          id: u.id,
-          name: u.full_name,
-          instituteName: u.institute_name || 'Independent Learner',
-          bridgeAccount: u.bridge_account,
-          avatar: u.avatar_url,
-          skillsTeach: skills.filter(s => s.skill_type === 'teach').map(s => s.skill_name),
-          skillsLearn: skills.filter(s => s.skill_type === 'learn').map(s => s.skill_name),
-          connectionStatus: 'none',
-          connectionId: null,
-          isRequester: false
-        };
+    // 3. For any candidate user whose full profile was not returned,
+    // fetch their profile securely using getUserById (which uses the SECURITY DEFINER get_profile_by_id)
+    const missingIds = [...candidateIds].filter(id => !usersMap.has(id));
+    if (missingIds.length > 0) {
+      const fetchedProfiles = await Promise.all(missingIds.map(id => this.getUserById(id).catch(() => null)));
+      for (const p of fetchedProfiles) {
+        if (p && p.id && !localDeletedUsers.has(p.id) && p.id !== currentUserId) {
+          usersMap.set(p.id, {
+            id: p.id,
+            name: p.name || p.full_name || 'Learner',
+            instituteName: p.instituteName || p.institute_name || 'Independent Learner',
+            bridgeAccount: p.bridgeAccount || p.bridge_account,
+            username: p.username || p.bridgeAccount || p.bridge_account,
+            avatar: p.avatar || p.avatar_url || `https://api.dicebear.com/7.x/bottts/svg?seed=${p.bridgeAccount || p.id}`,
+            skillsTeach: Array.isArray(p.skillsTeach) ? p.skillsTeach : [],
+            skillsLearn: Array.isArray(p.skillsLearn) ? p.skillsLearn : [],
+            connectionStatus: 'none',
+            connectionId: null,
+            isRequester: false
+          });
+        }
+      }
+    }
+
+    if (currentUserId) {
+      usersMap.delete(currentUserId);
+    }
+
+    let users = Array.from(usersMap.values());
+
+    // Sort: users with listed skills / completed profiles first, then alphabetically by name
+    users.sort((a, b) => {
+      const aSkills = (a.skillsTeach?.length || 0) + (a.skillsLearn?.length || 0);
+      const bSkills = (b.skillsTeach?.length || 0) + (b.skillsLearn?.length || 0);
+      if (bSkills !== aSkills) return bSkills - aSkills;
+      return (a.name || '').localeCompare(b.name || '');
+    });
+
+    // 4. Search query filtering
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase().trim();
+      users = users.filter(u => {
+        const hasTeach = (u.skillsTeach || []).some(s => (typeof s === 'string' ? s : s?.name || '').toLowerCase().includes(q));
+        const hasLearn = (u.skillsLearn || []).some(s => (typeof s === 'string' ? s : s?.name || '').toLowerCase().includes(q));
+        const hasName = (u.name || '').toLowerCase().includes(q);
+        const hasInst = (u.instituteName || '').toLowerCase().includes(q);
+        const hasUsername = (u.username || u.bridgeAccount || '').toLowerCase().includes(q);
+        return hasTeach || hasLearn || hasName || hasInst || hasUsername;
       });
-
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase().trim();
-        users = users.filter(u => {
-          const hasSkill = [...u.skillsTeach, ...u.skillsLearn].some(s => s.toLowerCase().includes(q));
-          const hasName = u.name.toLowerCase().includes(q);
-          const hasInst = u.instituteName.toLowerCase().includes(q);
-          return hasSkill || hasName || hasInst;
-        });
-      }
     }
 
     // ALWAYS guarantee connection status prioritization (accepted > pending > rejected)

@@ -1035,7 +1035,7 @@ export default function AuthModal({ onNavigateToProfile }) {
                 </button>
               </div>
               <p className="text-[11px] text-[#527568] mt-1">
-                A 6-digit OTP will be sent to your Gmail via Supabase Auth for identity verification.
+                6 digit OTP is sent to your mail account
               </p>
             </div>
 
