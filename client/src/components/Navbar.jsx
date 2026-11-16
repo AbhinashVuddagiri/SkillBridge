@@ -44,8 +44,12 @@ export default function Navbar({ currentView, setCurrentView, onOpenNotification
           onClick={() => handleNav('home')}
           className="flex items-center gap-3 cursor-pointer group select-none"
         >
-          <div className="w-10 h-10 rounded-xl bg-[#16866A] p-[2px] shadow-md shadow-[#16866A]/20 group-hover:scale-105 transition-transform flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-white group-hover:rotate-12 transition-transform" />
+          <div className="w-10 h-10 rounded-xl overflow-hidden shadow-xs border border-[#D5E9DF] group-hover:scale-105 transition-transform flex items-center justify-center bg-white p-0.5 shrink-0">
+            <img
+              src="/logo.png"
+              alt="SkillBridge Logo"
+              className="w-full h-full object-contain rounded-lg"
+            />
           </div>
           <div>
             <span className="font-extrabold text-xl tracking-tight text-[#164E41]">

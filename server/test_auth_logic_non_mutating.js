@@ -49,7 +49,7 @@ async function runNonMutatingVerification() {
   assert(!isValidGmail('user@outlook.com'), 'Rejects outlook domain');
   assert(!isValidGmail('user@gmail.org'), 'Rejects gmail.org');
   assert(!isValidGmail('user@gmail.co'), 'Rejects gmail.co');
-  assert(isValidGmail('alex.rivera@gmail.com'), 'Accepts standard alex.rivera@gmail.com');
+  assert(isValidGmail('abhi@gmail.com'), 'Accepts standard abhi@gmail.com');
   assert(isValidGmail('student123@gmail.com'), 'Accepts student123@gmail.com');
   assert(isValidGmail('LEARNER.TEST@GMAIL.COM'), 'Accepts uppercase case-insensitively');
 
@@ -111,13 +111,13 @@ async function runNonMutatingVerification() {
   const JWT_SECRET = process.env.JWT_SECRET || 'skillbridge_super_secure_jwt_secret_key_2026_production';
 
   const validToken = jwt.sign(
-    { email: 'alex.rivera@gmail.com', userId: 'test-uuid-123', purpose: 'registration-verified' },
+    { email: 'abhi@gmail.com', userId: 'test-uuid-123', purpose: 'registration-verified' },
     JWT_SECRET,
     { expiresIn: '15m' }
   );
   const decodedValid = jwt.verify(validToken, JWT_SECRET);
   assert(decodedValid.purpose === 'registration-verified', 'Valid verification token verified successfully');
-  assert(decodedValid.email === 'alex.rivera@gmail.com', 'Token binds to correct email');
+  assert(decodedValid.email === 'abhi@gmail.com', 'Token binds to correct email');
 
   let tamperedCaught = false;
   try {
@@ -128,7 +128,7 @@ async function runNonMutatingVerification() {
   assert(tamperedCaught, 'Tampered token is rejected');
 
   const expiredToken = jwt.sign(
-    { email: 'alex.rivera@gmail.com', purpose: 'registration-verified' },
+    { email: 'abhi@gmail.com', purpose: 'registration-verified' },
     JWT_SECRET,
     { expiresIn: '-1s' }
   );

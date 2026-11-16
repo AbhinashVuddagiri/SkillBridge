@@ -687,6 +687,19 @@ export const dbService = {
           isRequester: conn ? conn.isRequester : false
         };
       });
+
+      // CHANGE 3: Prioritize CONNECTED profiles first (accepted connections ONLY)
+      users.sort((a, b) => {
+        const aConnected = a.connectionStatus === 'accepted' ? 1 : 0;
+        const bConnected = b.connectionStatus === 'accepted' ? 1 : 0;
+        if (bConnected !== aConnected) {
+          return bConnected - aConnected; // Accepted connected profiles appear first
+        }
+        const aSkills = (a.skillsTeach?.length || 0) + (a.skillsLearn?.length || 0);
+        const bSkills = (b.skillsTeach?.length || 0) + (b.skillsLearn?.length || 0);
+        if (bSkills !== aSkills) return bSkills - aSkills;
+        return (a.name || '').localeCompare(b.name || '');
+      });
     }
 
     return users;

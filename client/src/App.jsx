@@ -134,9 +134,12 @@ export default function App() {
     return (
       <React.Suspense
         fallback={
-          <div className="py-24 text-center">
-            <div className="w-10 h-10 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            <p className="text-xs text-[#527568]">Loading...</p>
+          <div className="py-24 text-center space-y-3">
+            <div className="w-14 h-14 rounded-2xl bg-white border border-[#D5E9DF] p-1.5 flex items-center justify-center mx-auto shadow-xs animate-pulse">
+              <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-xl" />
+            </div>
+            <div className="w-6 h-6 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-xs text-[#527568]">Loading SkillBridge...</p>
           </div>
         }
       >

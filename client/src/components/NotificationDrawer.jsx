@@ -88,8 +88,8 @@ export default function NotificationDrawer({
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-[#D5E9DF] shrink-0">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-[#E4F6EE] text-[#16866A]">
-              <Bell className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-xl bg-white border border-[#D5E9DF] p-0.5 flex items-center justify-center shadow-xs overflow-hidden shrink-0">
+              <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-lg" />
             </div>
             <div>
               <h2 className="text-base font-bold text-[#164E41]">Notifications</h2>
@@ -237,7 +237,8 @@ export default function NotificationDrawer({
         </div>
 
         {/* Footer */}
-        <div className="pt-3 border-t border-[#D5E9DF] text-center shrink-0">
+        <div className="pt-3 border-t border-[#D5E9DF] flex items-center justify-center gap-2 shrink-0">
+          <img src="/logo.png" alt="SkillBridge Logo" className="w-4 h-4 object-contain rounded-xs" />
           <p className="text-[11px] text-[#527568]">
             SkillBridge Secure In-App Messaging
           </p>

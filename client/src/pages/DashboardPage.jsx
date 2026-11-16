@@ -92,6 +92,9 @@ export default function DashboardPage({ setCurrentView }) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Welcome & Stats Row */}
       <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#D5E9DF] shadow-md relative overflow-hidden">
+        <div className="absolute top-4 right-4 opacity-15 pointer-events-none hidden sm:block">
+          <img src="/logo.png" alt="SkillBridge" className="w-20 h-20 object-contain" />
+        </div>
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <img

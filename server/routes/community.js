@@ -112,7 +112,7 @@ router.get('/weekly-discovery', (req, res) => {
       dates: 'October 18 - 20, 2026',
       registeredCount: 380,
       booths: [
-        { track: 'Code & Systems', lead: 'Alex Rivera' },
+        { track: 'Code & Systems', lead: 'Abhi' },
         { track: 'Design & Visuals', lead: 'Sophia Chen' },
         { track: 'Data & AI', lead: 'Marcus Vance' },
         { track: 'Languages & Culture', lead: 'Elena Rostova' }

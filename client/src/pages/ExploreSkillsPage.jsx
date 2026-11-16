@@ -21,11 +21,23 @@ export default function ExploreSkillsPage({ onOpenChat }) {
   const [connectingId, setConnectingId] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
 
+  const sortConnectedFirst = (list) => {
+    return [...list].sort((a, b) => {
+      const aConnected = a.connectionStatus === 'accepted' ? 1 : 0;
+      const bConnected = b.connectionStatus === 'accepted' ? 1 : 0;
+      if (bConnected !== aConnected) return bConnected - aConnected;
+      const aSkills = (a.skillsTeach?.length || 0) + (a.skillsLearn?.length || 0);
+      const bSkills = (b.skillsTeach?.length || 0) + (b.skillsLearn?.length || 0);
+      if (bSkills !== aSkills) return bSkills - aSkills;
+      return (a.name || '').localeCompare(b.name || '');
+    });
+  };
+
   const fetchUsers = async (query = searchQuery) => {
     setLoading(true);
     try {
       const res = await api.getUsers(query ? { q: query } : {});
-      setUsers(res.users || []);
+      setUsers(sortConnectedFirst(res.users || []));
     } catch (err) {
       console.error('Failed to fetch users:', err);
       setErrorMsg('Failed to load learner profiles.');
@@ -51,12 +63,12 @@ export default function ExploreSkillsPage({ onOpenChat }) {
     try {
       await api.sendConnection(targetUser.id);
       // Immediately reflect pending status on card
-      setUsers(prev => prev.map(u => {
+      setUsers(prev => sortConnectedFirst(prev.map(u => {
         if (u.id === targetUser.id) {
           return { ...u, connectionStatus: 'pending', isRequester: true };
         }
         return u;
-      }));
+      })));
     } catch (err) {
       alert(err.message || 'Failed to send connection request.');
     } finally {
@@ -68,16 +80,21 @@ export default function ExploreSkillsPage({ onOpenChat }) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Header and Search */}
       <div className="space-y-4">
-        <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#16866A]">
-            Skill Discovery
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-black text-[#164E41] tracking-tight mt-1">
-            Explore Skills
-          </h1>
-          <p className="text-xs sm:text-sm text-[#527568] mt-1 max-w-2xl">
-            Find peers who can teach what you want to learn, and share what you already know.
-          </p>
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-2xl bg-white border border-[#D5E9DF] p-1 flex items-center justify-center shadow-xs overflow-hidden shrink-0">
+            <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-xl" />
+          </div>
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#16866A]">
+              Skill Discovery
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-black text-[#164E41] tracking-tight mt-0.5">
+              Explore Skills
+            </h1>
+            <p className="text-xs sm:text-sm text-[#527568] mt-1 max-w-2xl">
+              Find peers who can teach what you want to learn, and share what you already know.
+            </p>
+          </div>
         </div>
 
         {/* Functional Search Bar */}
@@ -110,13 +127,16 @@ export default function ExploreSkillsPage({ onOpenChat }) {
       {/* Grid of User Cards */}
       {loading ? (
         <div className="py-24 text-center space-y-3">
-          <div className="w-10 h-10 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-14 h-14 rounded-2xl bg-white border border-[#D5E9DF] p-1.5 flex items-center justify-center mx-auto shadow-xs animate-pulse">
+            <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-xl" />
+          </div>
+          <div className="w-6 h-6 border-2 border-[#16866A] border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs text-[#527568]">Loading learner profiles...</p>
         </div>
       ) : users.length === 0 ? (
         <div className="bg-white rounded-3xl p-12 text-center max-w-lg mx-auto border border-[#D5E9DF] shadow-xs space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-[#F1FAF5] border border-[#D5E9DF] flex items-center justify-center mx-auto text-[#527568]">
-            <Search className="w-6 h-6" />
+          <div className="w-14 h-14 rounded-2xl bg-white border border-[#D5E9DF] p-1.5 flex items-center justify-center mx-auto shadow-xs">
+            <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-xl" />
           </div>
           <h3 className="text-base font-bold text-[#164E41]">No Profiles Found</h3>
           <p className="text-xs text-[#527568] leading-relaxed">
@@ -157,9 +177,17 @@ export default function ExploreSkillsPage({ onOpenChat }) {
                     }}
                   />
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-base font-bold text-[#164E41] truncate group-hover:text-[#16866A] transition-colors">
-                      {targetUser.name}
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-base font-bold text-[#164E41] truncate group-hover:text-[#16866A] transition-colors">
+                        {targetUser.name}
+                      </h3>
+                      {status === 'accepted' && (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E4F6EE] text-[#16866A] border border-[#A8E6CF] shrink-0">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#16866A]" />
+                          Connected
+                        </span>
+                      )}
+                    </div>
                     <p className="text-xs text-[#527568] flex items-center gap-1.5 mt-0.5 truncate">
                       <GraduationCap className="w-3.5 h-3.5 text-[#16866A] shrink-0" />
                       <span className="truncate">{targetUser.instituteName || 'Independent Learner'}</span>

@@ -389,8 +389,8 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
   if (!user) {
     return (
       <div className="max-w-md mx-auto py-24 px-4 text-center space-y-4">
-        <div className="w-14 h-14 rounded-2xl bg-[#A8E6CF]/15 text-[#A8E6CF] flex items-center justify-center mx-auto mb-2">
-          <MessageSquare className="w-7 h-7" />
+        <div className="w-16 h-16 rounded-2xl bg-white border border-[#D5E9DF] p-1.5 flex items-center justify-center mx-auto mb-2 shadow-xs">
+          <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-xl" />
         </div>
         <h2 className="text-xl font-bold text-[#164E41]">Sign In to Chat</h2>
         <p className="text-xs text-[#527568]">
@@ -421,8 +421,8 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
           <div className="p-4 border-b border-[#D5E9DF] space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-[#E4F6EE] text-[#16866A]">
-                  <MessageSquare className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-white border border-[#D5E9DF] p-0.5 flex items-center justify-center shadow-xs overflow-hidden shrink-0">
+                  <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-lg" />
                 </div>
                 <div>
                   <h2 className="text-sm font-bold text-[#164E41]">Messages</h2>
@@ -1077,8 +1077,8 @@ export default function ChatPage({ selectedConnectionId, setSelectedConnectionId
             </>
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center p-8 text-center space-y-3">
-              <div className="w-16 h-16 rounded-3xl bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A] flex items-center justify-center mb-1">
-                <MessageSquare className="w-8 h-8" />
+              <div className="w-16 h-16 rounded-3xl bg-white border border-[#D5E9DF] p-1.5 flex items-center justify-center mb-1 shadow-xs">
+                <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-2xl" />
               </div>
               <h3 className="text-base font-bold text-[#164E41]">Select a Conversation</h3>
               <p className="text-xs text-[#527568] max-w-sm">

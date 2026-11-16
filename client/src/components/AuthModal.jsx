@@ -499,14 +499,12 @@ export default function AuthModal({ onNavigateToProfile }) {
 
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex p-3 rounded-2xl bg-[#E4F6EE] border border-[#D5E9DF] mb-3 shadow-inner">
-            {mode === 'forgot-password' ? (
-              <KeyRound className="w-7 h-7 text-[#16866A]" />
-            ) : mode === 'register' ? (
-              <UserPlus className="w-7 h-7 text-[#16866A]" />
-            ) : (
-              <Sparkles className="w-7 h-7 text-[#16866A]" />
-            )}
+          <div className="inline-flex p-1 rounded-2xl bg-white border border-[#D5E9DF] mb-3 shadow-xs">
+            <img
+              src="/logo.png"
+              alt="SkillBridge Logo"
+              className="w-12 h-12 object-contain rounded-xl"
+            />
           </div>
           <h2 className="text-2xl font-bold text-[#164E41] tracking-tight">
             {mode === 'forgot-password' && 'Reset Password'}
@@ -611,7 +609,7 @@ export default function AuthModal({ onNavigateToProfile }) {
                     required
                     autoComplete="off"
                     disabled={loading}
-                    placeholder="Enter your username or alex@gmail.com"
+                    placeholder="Enter your username or abhi@gmail.com"
                     value={forgotIdentifier}
                     onChange={(e) => setForgotIdentifier(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
@@ -876,7 +874,7 @@ export default function AuthModal({ onNavigateToProfile }) {
                   required
                   autoComplete="off"
                   disabled={loading}
-                  placeholder="alex_rivera or alex@gmail.com"
+                  placeholder="abhi or abhi@gmail.com"
                   value={loginIdentifier}
                   onChange={(e) => setLoginIdentifier(e.target.value)}
                   className="w-full pl-8 pr-4 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs font-mono focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A] disabled:opacity-60 disabled:cursor-not-allowed"
@@ -958,7 +956,7 @@ export default function AuthModal({ onNavigateToProfile }) {
                 type="text"
                 required
                 autoComplete="off"
-                placeholder="e.g. Alex Rivera"
+                placeholder="e.g. Abhi"
                 value={regFullName}
                 onChange={(e) => setRegFullName(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#C8DFD3] text-[#164E41] placeholder-[#527568]/60 text-xs focus:outline-none focus:border-[#16866A] focus:ring-1 focus:ring-[#16866A]"
@@ -993,7 +991,7 @@ export default function AuthModal({ onNavigateToProfile }) {
                     required
                     autoComplete="off"
                     disabled={isEmailVerified || isSendingOtp}
-                    placeholder="alex@gmail.com"
+                    placeholder="abhi@gmail.com"
                     value={regGmail}
                     onChange={(e) => {
                       setRegGmail(e.target.value);
@@ -1125,7 +1123,7 @@ export default function AuthModal({ onNavigateToProfile }) {
                   required
                   autoComplete="off"
                   disabled={loading}
-                  placeholder="alex_rivera"
+                  placeholder="abhi"
                   value={regUsername}
                   onChange={(e) => setRegUsername(e.target.value)}
                   className={`w-full pl-8 pr-9 py-2.5 rounded-xl bg-white border text-[#164E41] placeholder-[#527568]/60 text-xs font-mono focus:outline-none disabled:opacity-60 disabled:cursor-not-allowed ${

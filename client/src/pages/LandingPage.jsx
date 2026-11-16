@@ -18,8 +18,8 @@ export default function LandingPage({ setCurrentView }) {
     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-16">
       {/* Hero Section */}
       <section className="text-center max-w-3xl mx-auto space-y-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A] text-xs font-semibold shadow-xs">
-          <Sparkles className="w-4 h-4 text-[#16866A]" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E4F6EE] border border-[#D5E9DF] text-[#16866A] text-xs font-semibold shadow-xs">
+          <img src="/logo.png" alt="SkillBridge Logo" className="w-4 h-4 object-contain rounded-xs" />
           <span>Peer-to-Peer Learning Platform</span>
         </div>
 

@@ -8,8 +8,12 @@ export default function Footer({ setCurrentView }) {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Brand */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-[#16866A] p-[2px] flex items-center justify-center shadow-xs">
-              <Sparkles className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 rounded-xl bg-white border border-[#D5E9DF] p-0.5 flex items-center justify-center shadow-xs overflow-hidden shrink-0">
+              <img
+                src="/logo.png"
+                alt="SkillBridge Logo"
+                className="w-full h-full object-contain rounded-lg"
+              />
             </div>
             <div>
               <span className="font-extrabold text-base text-[#164E41] tracking-tight">

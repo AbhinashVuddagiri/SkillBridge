@@ -341,16 +341,21 @@ export default function ProfilePage({ setCurrentView }) {
       {/* Header */}
       <div className="space-y-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#16866A]">
-              Profile & Account
-            </span>
-            <h1 className="text-3xl font-black text-[#164E41] tracking-tight mt-1">
-              Update Profile
-            </h1>
-            <p className="text-xs sm:text-sm text-[#527568]">
-              Manage your credentials, teaching capabilities, and learning interests.
-            </p>
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-white border border-[#D5E9DF] p-1 flex items-center justify-center shadow-xs overflow-hidden shrink-0">
+              <img src="/logo.png" alt="SkillBridge Logo" className="w-full h-full object-contain rounded-xl" />
+            </div>
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#16866A]">
+                Profile & Account
+              </span>
+              <h1 className="text-3xl font-black text-[#164E41] tracking-tight mt-0.5">
+                Update Profile
+              </h1>
+              <p className="text-xs sm:text-sm text-[#527568]">
+                Manage your credentials, teaching capabilities, and learning interests.
+              </p>
+            </div>
           </div>
 
           <div className="flex items-center gap-2">
